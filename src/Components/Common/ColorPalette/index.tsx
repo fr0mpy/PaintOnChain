@@ -7,7 +7,6 @@ import { setBrushColor, setColorPallette } from "../../../Redux/rootSlice";
 import { useAppSelector } from "../../../Redux/store";
 import chroma from "chroma-js";
 import { StyledToolTip } from "../StyledToolTip";
-import React from 'react';
 
 export const ColorPalette = () => {
 
