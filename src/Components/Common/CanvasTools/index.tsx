@@ -3,7 +3,7 @@ import { useMediaQuery } from "@mui/material";
 import { Theme } from "@mui/system";
 import { ChangeEvent } from "react";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
-import { setIsDrawingMode, setTool, setBrushColor, setSVG, setModalType, setObjectSelection, setBrushWidth, setShapeFill } from "../../../Redux/rootSlice";
+import { setIsDrawingMode, setTool, setBrushColor, setSVG, setModalType, setObjectSelection, setBrushWidth, setShapeFill, setColorPallette, defaultColorPalette } from "../../../Redux/rootSlice";
 import { useAppSelector } from "../../../Redux/store";
 import { ModalType } from "../../Layout/ModalResolver";
 import { DesktopCanvasTools } from './DesktopTools'
@@ -52,6 +52,7 @@ export const CanvasTools: React.FC<IProps> = ({ canvasRef, objOriginRef, objRef,
 			objRef.current = null;
 			dispatch(setBrushColor(brushColor));
 			dispatch(setTool('draw'));
+			dispatch(setObjectSelection(false));
 		}
 	};
 
@@ -66,9 +67,12 @@ export const CanvasTools: React.FC<IProps> = ({ canvasRef, objOriginRef, objRef,
 				canvasRef.current?.remove(o);
 			})
 
+			dispatch(setColorPallette(defaultColorPalette))
 			localStorage.removeItem('canvasData');
 			localStorage.removeItem('colorsData');
 			localStorage.removeItem('brushColor');
+			localStorage.removeItem('brushWidth');
+
 		}
 	};
 

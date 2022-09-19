@@ -7,7 +7,7 @@ import { setBrushColor, setColorPallette } from "../../../Redux/rootSlice";
 import { useAppSelector } from "../../../Redux/store";
 import chroma from "chroma-js";
 import { StyledToolTip } from "../StyledToolTip";
-
+import React from 'react';
 
 export const ColorPalette = () => {
 
@@ -20,11 +20,17 @@ export const ColorPalette = () => {
 		}
 	});
 
+	const handleSaveColors = (colors: Array<string>) => {
+		const colorsData = JSON.stringify(colors);
+		localStorage.setItem('colorsData', colorsData);
+	}
+
 	const randomizePalette = () => {
 		const randomTertiaryColors = [...Array(6)].map(r => generateRandomColor());
 		const randomizedPalette = chroma.scale(randomTertiaryColors).colors(16);
 		dispatch(setColorPallette(randomizedPalette));
 		dispatch(setBrushColor(randomizedPalette[currentColorIndex]));
+		handleSaveColors(randomizedPalette);
 	};
 
 	return (

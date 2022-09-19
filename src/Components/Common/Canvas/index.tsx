@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { setBrushColor, setBrushWidth, setColorPallette } from '../../../Redux/rootSlice';
 import Grid from '@mui/material/Grid/Grid';
 import { useAppSelector } from '../../../Redux/store';
+import Typography from '@mui/material/Typography/Typography';
 
 interface IProps {
 	canvasRef: React.MutableRefObject<fabric.Canvas | null>,
@@ -40,7 +41,7 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 		objectSelection,
 		brushColor,
 		shapeFill,
-		colorPallette
+		colorPallette,
 	} = useAppSelector(state => {
 		return {
 			tool: state.rootReducer.tool,
@@ -49,7 +50,7 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 			objectSelection: state.rootReducer.objectSelection,
 			brushColor: state.rootReducer.brushColor,
 			shapeFill: state.rootReducer.shapeFill,
-			colorPallette: state.rootReducer.colorPallette
+			colorPallette: state.rootReducer.colorPallette,
 		}
 	});
 
@@ -68,8 +69,8 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 				canvasRef.current.isDrawingMode = isDrawingMode;
 				handleLoadCanvas();
 				handleLoadColors()
-				handleBrushColorLoad();
-				handleBrushWidthLoad();
+				handleLoadBrushColor();
+				handleLoadBrushWidth();
 				setLoaded(true);
 
 			}
@@ -83,7 +84,9 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 		brushColor,
 		shapeFill,
 		canvasHeight,
-		canvasWidth
+		canvasWidth,
+		// isDrawingMode,
+		// objectSelection
 	]);
 
 	React.useEffect(() => {
@@ -108,8 +111,13 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 			mousedownRef.current = true;
 
 			switch (tool) {
+				case 'draw':
+					canvasRef.current.isDrawingMode = true;
+					break;
 				case 'line':
 					if (!e.pointer || !drawingObjRef.current) return;
+					canvasRef.current.isDrawingMode = false;
+
 					canvasRef.current.selection = objectSelection;
 
 					objRef.current = new fabric.Line(
@@ -121,6 +129,7 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 					break;
 				case 'circle':
 					if (!e.pointer || !drawingObjRef.current || !objOriginRef.current) return;
+					canvasRef.current.isDrawingMode = false;
 					canvasRef.current.selection = objectSelection;
 					objOriginRef.current = { x: e.pointer.x, y: e.pointer.y };
 
@@ -144,6 +153,8 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 					break;
 				case 'square':
 					if (!e.pointer || !drawingObjRef.current || !objOriginRef.current) return;
+					canvasRef.current.isDrawingMode = false;
+					canvasRef.current.selection = objectSelection;
 					objOriginRef.current = { x: e.pointer.x, y: e.pointer.y };
 
 					objRef.current = new fabric.Rect({
@@ -157,11 +168,14 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 						fill: shapeFill ? brushColor : '',
 						transparentCorners: false,
 						stroke: brushColor,
-						strokeWidth: brushWidth
+						strokeWidth: brushWidth,
+						selectable: objectSelection,
+						evented: objectSelection
 					});
 					canvasRef.current.add(objRef.current);
 					break;
 				case 'select':
+					canvasRef.current.isDrawingMode = false;
 					break;
 				default:
 					return;
@@ -195,28 +209,10 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 
 					(objRef.current as fabric.Circle).set({ radius: radius });
 
-					if (objOriginRef.current.x > e.pointer.x) {
-						(objRef.current as fabric.Circle).set({ originX: 'right' });
-					} else {
-						(objRef.current as fabric.Circle).set({ originX: 'left' });
-					}
-					if (objOriginRef.current.y > e.pointer.y) {
-						(objRef.current as fabric.Circle).set({ originY: 'bottom' });
-					} else {
-						(objRef.current as fabric.Circle).set({ originY: 'top' });
-					}
-
 					canvasRef.current.renderAll();
 					break;
 				case 'square':
 					if (!canvasRef.current || !e.pointer || !objRef.current) return;
-
-					if (objOriginRef.current.x > e.pointer.x) {
-						(objRef.current as fabric.Rect).set({ left: Math.abs(e.pointer.x) });
-					}
-					if (objOriginRef.current.y > e.pointer.y) {
-						(objRef.current as fabric.Rect).set({ top: Math.abs(e.pointer.y) });
-					}
 
 					(objRef.current as fabric.Rect).set({ width: Math.abs(objOriginRef.current.x - e.pointer.x) });
 					(objRef.current as fabric.Rect).set({ height: Math.abs(objOriginRef.current.y - e.pointer.y) });
@@ -237,15 +233,11 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 		});
 	};
 
-	const handleBrushColorLoad = () => {
-		const loadedBrushColor = localStorage.getItem('brushColor');
-
-		if (!loadedBrushColor) return;
-
-		dispatch(setBrushColor(loadedBrushColor));
+	const handleLoadBrushColor = () => {
+		dispatch(setBrushColor(colorPallette[0]));
 	}
 
-	const handleBrushWidthLoad = () => {
+	const handleLoadBrushWidth = () => {
 		const loadedBrushWidth = Number(localStorage.getItem('brushWidth'));
 
 		if (!loadedBrushWidth) return;
@@ -257,7 +249,6 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 		if (!canvasRef.current) return;
 		const canvasDataJSON = JSON.stringify(canvasRef.current);
 		localStorage.setItem('canvasData', canvasDataJSON);
-		localStorage.setItem('brushColor', brushColor);
 	};
 
 	const handleLoadCanvas = () => {
@@ -267,8 +258,8 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 
 	};
 
-	const handleLoadColors = async () => {
-		const colorsData = await localStorage.getItem('colorsData');
+	const handleLoadColors = () => {
+		const colorsData = localStorage.getItem('colorsData');
 
 		if (!colorsData) return setLoaded(true);
 		const loadedColors = colorPallette.map((_: any, i: number) => JSON.parse(colorsData)[i])
@@ -293,6 +284,7 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 			}}
 			id={'canvasContainer'}
 		>
+			{!canvasHeight || !canvasWidth ? <Typography variant={'body1'}>Loading Canvas...</Typography> : null}
 			<div style={!canvasHeight || !canvasWidth ? { position: 'absolute', left: -10000 } : { width: 'fit-content', height: 'fit-content' }}>
 				<canvas id={'canvas'} />
 			</div>

@@ -1,7 +1,6 @@
 
 import * as React from 'react';
 import Grid from "@mui/material/Grid/Grid";
-import { LoadingProgress } from '../../../Components/Common/LoadingProgress'
 
 interface IProps {
 	navigation?: React.ReactNode;

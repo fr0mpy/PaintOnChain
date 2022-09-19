@@ -2,13 +2,14 @@
 
 /**p
 * 
- * modal to have nav buttons which scroll the the project info topic (mobile & tablet)
- * objects not selecting
- * help steps in about
- * test
  * GA
  * real social links 
- * square object movement broken
- * unable to draw after selecting item
- * welcome modal
+ * copy 
+ * erase should not be selectable
+ * test all contract functions
+ * create wallet to launch from 
+ * create open sea 
+ * hide discord link temporarily
+ * host
+ * point URL
  */

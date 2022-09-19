@@ -23,7 +23,7 @@ export interface IAppState {
 	section: Sections;
 }
 
-const defaultColorPalette = ['black', ...Array(14).fill('white')]
+export const defaultColorPalette = ['black', ...Array(14).fill('white')];
 
 export const initialState: IAppState = {
 	value: 0,

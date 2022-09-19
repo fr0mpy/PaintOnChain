@@ -88,6 +88,10 @@ export const WelcomeModal = () => {
                             primary="Mint your token to your or a friends wallet, with the image data stored on the Ethereum Blockchain!"
                         />
                     </ListItem>
+                    <Spacer vertical spacing={2} />
+                    <Typography variant={'body1'} sx={{ fontSize: 12 }} textAlign={'center'}>
+                        This is the beta version of the project. If there is anything you see which can be improved, please reach out.
+                    </Typography>
                     <Spacer vertical spacing={isMobile ? 2 : 4} />
                     <Grid container direction={'column'} justifyContent={'center'} alignItems={'center'}>
                         <Button variant={'contained'} color={'secondary'} disableElevation onClick={handleClose} sx={{ width: 140, height: 48, border: 'solid 4px white' }}>

@@ -218,7 +218,7 @@ export const MintModal = () => {
 					}
 				}}
 			>
-				<DialogTitle sx={{ backgroundColor: 'black', color: 'white' }}>
+				<DialogTitle sx={{ backgroundColor: (theme) => theme.palette.primary.dark, color: 'white' }}>
 					<IconButton
 						aria-label="close"
 						onClick={handleClose}
@@ -232,9 +232,7 @@ export const MintModal = () => {
 						<CloseIcon />
 					</IconButton>
 					<Typography variant={'body1'} textAlign={'center'} sx={{ margin: (theme) => theme.spacing(0, 3), fontSize: 12 }}>
-						{walletToMintTo === WalletTypes.Own
-							? `This token will be minted to your connected wallet: ${walletAddress.slice(0, 15)}...`
-							: `This token will be minted to your friends wallet`}
+						{`Connected as: ${walletAddress}`}
 					</Typography>
 				</DialogTitle>
 				<DialogContent dividers sx={{ backgroundColor: (theme) => theme.palette.primary.light }}>

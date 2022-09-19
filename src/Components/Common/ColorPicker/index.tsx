@@ -11,9 +11,9 @@ interface IProps {
 }
 
 export const ColorPicker: React.FC<IProps> = ({ color }) => {
-	// const [loaded, setLoaded] = React.useState<boolean>(false);
 
 	const dispatch = useDispatch();
+
 	const { colorPallette, currentColorIndex } = useAppSelector(state => {
 		return {
 			colorPallette: state.rootReducer.colorPallette,
@@ -22,7 +22,7 @@ export const ColorPicker: React.FC<IProps> = ({ color }) => {
 	});
 
 	const throttleColorUpdate = (color: string) => {
-		throttle(() => { handleColorUpdate(color) }, 250)
+		throttle(() => { handleColorUpdate(color) }, 100)
 	}
 
 	const handleColorUpdate = (color: string) => {
@@ -34,7 +34,7 @@ export const ColorPicker: React.FC<IProps> = ({ color }) => {
 
 		dispatch(setColorPallette(updatedColors));
 		dispatch(setBrushColor(color));
-		handleSaveColors()
+		handleSaveColors();
 	}
 
 	const handleSaveColors = () => {

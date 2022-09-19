@@ -3,7 +3,6 @@ import * as React from 'react';
 
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import { theme } from './Theme'
-import { LoadingProgress } from './Components/Common/LoadingProgress';
 import { LayoutResolver } from "./Components/Layout/LayoutResolver";
 import { ModalResolver, ModalType } from './Components/Layout/ModalResolver';
 import { useDispatch } from 'react-redux';
