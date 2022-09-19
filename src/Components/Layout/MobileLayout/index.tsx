@@ -33,7 +33,7 @@ const MobileLayout: React.FC<IProps> = ({ canvasRef, canvas, canvasTools }) => {
     const openMenu = () => dispatch(setModalType(ModalType.Menu));
 
     return <div style={{ height: '100%', display: 'flex', flexFlow: 'column' }}>
-        <Grid container sx={{ width: '100%', backgroundColor: 'black', height: 'fit-content', padding: '12px 12px 7px 12px', position: 'relative' }}>
+        <Grid container sx={{ width: '100%', backgroundColor: 'black', height: 'fit-content', padding: 1.5, position: 'relative' }}>
             <Grid container direction={'row'} justifyContent={'space-between'} >
                 <IconButton sx={{ padding: 0, marginRight: 1 }} onClick={openMenu}>
                     <MenuIcon sx={{ color: 'white', height: 46, width: 46 }} />

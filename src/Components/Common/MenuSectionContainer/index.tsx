@@ -10,7 +10,7 @@ export const MenuSectionContainer: React.FC<ITabletSectionContainer> = ({ childr
     return (
         <div style={{
             backgroundColor: '#e579b9',
-            border: 'solid 5px rgb(160, 84, 129)',
+            border: 'solid 5px rgb(234, 147, 199)',
             color: 'white',
             borderRadius: '5px',
             height: 'fit-content',

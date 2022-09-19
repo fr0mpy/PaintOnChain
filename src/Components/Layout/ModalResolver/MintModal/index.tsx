@@ -209,30 +209,29 @@ export const MintModal = () => {
 				open
 				PaperProps={{
 					sx: {
-						margin: { xs: 1, sm: 2 },
+						maxHeight: '100%',
+						maxWidth: '100%',
+						margin: 0,
 						backgroundColor: (theme) => theme.palette.primary.light,
-						width: '700px',
-						height: '700px',
-						border: (theme) => `solid 4px ${theme.palette.primary.dark}`,
-						borderRadius: 1.5
+						borderRadius: 0
 					}
 				}}
 			>
-				<DialogTitle sx={{ backgroundColor: (theme) => theme.palette.primary.dark, color: 'white' }}>
-					<IconButton
-						aria-label="close"
-						onClick={handleClose}
-						sx={{
-							position: 'absolute',
-							right: 8,
-							top: 8,
-							color: 'white'
-						}}
-					>
-						<CloseIcon />
-					</IconButton>
-					<Typography variant={'body1'} textAlign={'center'} sx={{ margin: (theme) => theme.spacing(0, 3), fontSize: 12 }}>
-						{`Connected as: ${walletAddress}`}
+				<DialogTitle sx={{ backgroundColor: (theme) => theme.palette.primary.dark, color: 'white', padding: 1 }}>
+					<Grid container justifyContent={'flex-end'}>
+						<IconButton
+							aria-label="close"
+							onClick={handleClose}
+							sx={{ padding: 0 }}
+						>
+							<CloseIcon fontSize={'large'} sx={{ color: 'white' }} />
+						</IconButton>
+					</Grid>
+					<Typography variant={'body1'} textAlign={'center'} sx={{ margin: (theme) => theme.spacing(0, 3) }}>
+						Connected as:
+					</Typography>
+					<Typography variant={'body1'} textAlign={'center'} sx={{ margin: (theme) => theme.spacing(0, 3) }}>
+						{`${walletAddress.slice(0, 30)}...`}
 					</Typography>
 				</DialogTitle>
 				<DialogContent dividers sx={{ backgroundColor: (theme) => theme.palette.primary.light }}>

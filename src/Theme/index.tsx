@@ -35,7 +35,7 @@ export const theme = createTheme({
 		caption: {
 			fontFamily: 'Roboto Slab, serif',
 			fontWeight: 500,
-			fontSize: '10px'
+			fontSize: 14
 		}
 	}
 });

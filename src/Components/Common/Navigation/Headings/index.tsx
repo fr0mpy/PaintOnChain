@@ -18,8 +18,6 @@ export const Headings = () => {
     const { section } = useAppSelector(state => {
         return {
             section: state.rootReducer.section,
-            colorPallette: state.rootReducer.colorPallette,
-            currentColorIndex: state.rootReducer.currentColorIndex
         }
     });
 
@@ -33,7 +31,11 @@ export const Headings = () => {
                 const active = i === section;
                 return (
                     <Button onClick={onClick(i)}>
-                        <Typography variant={"body1"} textAlign={'center'} sx={{ opacity: active ? 1 : .7 }}>
+                        <Typography variant={"body1"} textAlign={'center'} sx={{
+                            opacity: active ? 1 : .7,
+                            fontSize: { sm: 20, md: 20 },
+                            color: { xs: 'white', lg: (theme) => theme.palette.primary.main }
+                        }}>
                             {heading}
                         </Typography>
                     </Button>

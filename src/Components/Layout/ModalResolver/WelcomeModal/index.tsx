@@ -45,51 +45,51 @@ export const WelcomeModal = () => {
                         width: '100%',
                         maxWidth: '500px',
                         height: 'fit-content',
-                        border: (theme) => `solid 4px ${theme.palette.primary.dark}`,
+                        border: (theme) => `solid 4px ${theme.palette.primary.main}`,
                         borderRadius: 1.5
                     }
                 }}
                 TransitionComponent={Transition}
             >
-                <DialogContent dividers sx={{ backgroundColor: (theme) => theme.palette.primary.light }}>
-                    <Typography variant={isMobile ? 'h4' : 'h3'}>
+                <DialogContent dividers sx={{ backgroundColor: (theme) => theme.palette.primary.dark }}>
+                    <Typography variant={isMobile ? 'h4' : 'h3'} sx={{ color: 'white' }}>
                         Hello! And welcome to Paint On Chain ✌️
                     </Typography>
                     <Spacer vertical spacing={isMobile ? 2 : 4} />
-                    <ListItem sx={{ padding: 0, '& .MuiListItemIcon-root': { minWidth: 32, alignSelf: 'flex-start', position: 'relative', top: 7 } }}>
+                    <ListItem sx={{ color: 'white', padding: 0, '& .MuiListItemIcon-root': { minWidth: 32, alignSelf: 'flex-start', position: 'relative', top: 7 } }}>
                         <ListItemIcon>
-                            <CircleIcon sx={{ height: 18, width: 18, fill: (theme) => theme.palette.primary.dark, marginRight: 1 }} />
+                            <CircleIcon sx={{ height: 18, width: 18, fill: (theme) => theme.palette.primary.light, marginRight: 1 }} />
                         </ListItemIcon>
                         <ListItemText
                             primary="Connect your wallet"
                         />
                     </ListItem>
-                    <ListItem sx={{ padding: 0, '& .MuiListItemIcon-root': { minWidth: 32, alignSelf: 'flex-start', position: 'relative', top: 7 } }}>
+                    <ListItem sx={{ color: 'white', padding: 0, '& .MuiListItemIcon-root': { minWidth: 32, alignSelf: 'flex-start', position: 'relative', top: 7 } }}>
                         <ListItemIcon>
-                            <CircleIcon sx={{ height: 18, width: 18, fill: (theme) => theme.palette.primary.dark, marginRight: 1 }} />
+                            <CircleIcon sx={{ height: 18, width: 18, fill: (theme) => theme.palette.primary.light, marginRight: 1 }} />
                         </ListItemIcon>
                         <ListItemText
                             primary="Paint your NFT - using a range of tools and colors"
                         />
                     </ListItem>
-                    <ListItem sx={{ padding: 0, '& .MuiListItemIcon-root': { minWidth: 32, alignSelf: 'flex-start', position: 'relative', top: 7 } }}>
+                    <ListItem sx={{ color: 'white', padding: 0, '& .MuiListItemIcon-root': { minWidth: 32, alignSelf: 'flex-start', position: 'relative', top: 7 } }}>
                         <ListItemIcon>
-                            <CircleIcon sx={{ height: 18, width: 18, fill: (theme) => theme.palette.primary.dark, marginRight: 1 }} />
+                            <CircleIcon sx={{ height: 18, width: 18, fill: (theme) => theme.palette.primary.light, marginRight: 1 }} />
                         </ListItemIcon>
                         <ListItemText
                             primary="Add your custom metadata - name, description & traits"
                         />
                     </ListItem>
-                    <ListItem sx={{ padding: 0, '& .MuiListItemIcon-root': { minWidth: 32, alignSelf: 'flex-start', position: 'relative', top: 7 } }}>
+                    <ListItem sx={{ color: 'white', padding: 0, '& .MuiListItemIcon-root': { minWidth: 32, alignSelf: 'flex-start', position: 'relative', top: 7 } }}>
                         <ListItemIcon>
-                            <CircleIcon sx={{ height: 18, width: 18, fill: (theme) => theme.palette.primary.dark, marginRight: 1 }} />
+                            <CircleIcon sx={{ height: 18, width: 18, fill: (theme) => theme.palette.primary.light, marginRight: 1 }} />
                         </ListItemIcon>
                         <ListItemText
                             primary="Mint your token to your or a friends wallet, with the image data stored on the Ethereum Blockchain!"
                         />
                     </ListItem>
                     <Spacer vertical spacing={2} />
-                    <Typography variant={'body1'} sx={{ fontSize: 12 }} textAlign={'center'}>
+                    <Typography variant={'body1'} sx={{ fontSize: 12, color: 'white' }} textAlign={'center'}>
                         This is the beta version of the project. If there is anything you see which can be improved, please reach out.
                     </Typography>
                     <Spacer vertical spacing={isMobile ? 2 : 4} />
@@ -101,7 +101,7 @@ export const WelcomeModal = () => {
                         </Button>
                         <Spacer vertical spacing={2} />
                         <FormGroup>
-                            <FormControlLabel control={<Checkbox onChange={handleChange} sx={{ '& .MuiSvgIcon-root': { fill: (theme) => theme.palette.primary.dark } }} />} label="Don't show me this again" />
+                            <FormControlLabel sx={{ color: 'white' }} control={<Checkbox onChange={handleChange} sx={{ '& .MuiSvgIcon-root': { fill: 'white' } }} />} label="Don't show me this again" />
                         </FormGroup>
                     </Grid>
                 </DialogContent>
