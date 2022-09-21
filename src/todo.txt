@@ -2,8 +2,16 @@
 
 /**p
 * 
-* snackbars instead of alerts
-* input for brushwidth
+ * explain more about what the nft offers - the problem is solves and the creative suite
+ * on chain NFT generators for whole collections
+ * input hover states
+ * forms scroll on med upwards screens 
+ * input for brush width
+ * nav links on desktop wrong color
+ * mint radio buttons wrong color
+ * only deploy front end not contract
+ * host
+ * sort routes for url
  * GA
  * real social links 
  * copy 
@@ -15,4 +23,6 @@
  * host
  * point URL
  * check no secrets
+ * navigation scroll bar
+ * links to turn to acive when scroll past for mobile/tablet nav
  */

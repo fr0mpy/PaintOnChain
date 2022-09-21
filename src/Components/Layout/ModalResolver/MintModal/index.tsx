@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import React from "react";
 import { useDispatch } from "react-redux";
 import contractABI from '../../../../artifacts/contracts/PaintOnChain.sol/PAINT_ON_CHAIN.json';
-import { Dialog, DialogContent, DialogTitle, IconButton, Typography, Grid, TextField, Button, FormControl, RadioGroup, FormControlLabel, Radio, Theme, useMediaQuery } from "@mui/material";
+import { Dialog, DialogContent, DialogTitle, IconButton, Typography, Grid, TextField, Button, FormControl, RadioGroup, FormControlLabel, Radio, Theme, useMediaQuery, Box } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { Spacer } from "../../../Common/Spacer";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
@@ -27,9 +27,9 @@ enum WalletTypes {
 }
 export const MintModal = () => {
 	const dispatch = useDispatch();
-	const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 
 	const svgContainerRef = React.useRef<HTMLDivElement | null>(null);
+	const boxRef = React.useRef<HTMLDivElement | null>(null);
 
 	const [traits, setTraits] = React.useState<Array<ITraits>>([]);
 	const [name, setName] = React.useState<string>('');
@@ -67,15 +67,17 @@ export const MintModal = () => {
 		}
 	});
 
-	const updateTraits = () => {
-		return traits.map((trait, i) => trait)
-	}
 
 	const renderForms = () => {
 		return [...Array(numberOfTraitForms)].map((_, i) => {
 			return (
-				<Grid container spacing={1} direction={'row'} onClick={() => setActiveFormIndex(i)} sx={{ position: 'relative', marginBottom: (theme) => theme.spacing(1) }}>
-					<Grid item xs={6}>
+				<Grid
+					container
+					direction={'row'}
+					onClick={() => setActiveFormIndex(i)}
+					sx={{ position: 'relative', marginBottom: 1 }}
+				>
+					<div style={{ flex: 2 }}>
 						<TextField type={'text'} variant={'outlined'}
 							inputProps={{
 								sx: {
@@ -84,15 +86,15 @@ export const MintModal = () => {
 									}
 								}
 							}}
-							sx={{ '& .MuiOutlinedInput-notchedOutline': { borderColor: 'white' }, '& .MuiFormLabel-root': { color: (theme) => theme.palette.primary.dark } }}
+							sx={{ '& .MuiOutlinedInput-notchedOutline': { borderColor: 'white' }, '& .MuiFormLabel-root': { color: (theme) => theme.palette.primary.dark }, marginRight: (theme) => theme.spacing(1) }}
 							value={traits[i] ? traits[i].trait_type : ''}
 							label={'Trait Name'}
 							placeholder={'Add Trait Name'}
 							name={'trait_type'}
 							onChange={(e) => handleChange(e, i)}
 						/>
-					</Grid>
-					<Grid item xs={6}>
+					</div>
+					<div style={{ flex: 2 }}>
 						<TextField
 							type={'text'}
 							variant={'outlined'}
@@ -110,10 +112,16 @@ export const MintModal = () => {
 							name={'value'}
 							onChange={(e) => handleChange(e, i)}
 						/>
-					</Grid>
-					<IconButton onClick={() => handleRemoveTrait(i)} sx={{ position: 'absolute', right: { xs: -32, sm: -40 }, top: 16, color: 'white' }}>
-						<CloseIcon />
-					</IconButton>
+					</div>
+					<div style={{ display: 'flex', alignItems: 'center' }}>
+						<IconButton
+							onClick={() => handleRemoveTrait(i)}
+							sx={{ color: 'white', padding: (theme) => theme.spacing(0, 0, 0, 1) }}
+						>
+							<CloseIcon />
+						</IconButton>
+					</div>
+					<Spacer vertical spacing={1} />
 				</Grid>
 			)
 		})
@@ -182,7 +190,21 @@ export const MintModal = () => {
 
 	const handleClose = () => dispatch(setModalType(undefined));
 
+	const handleBoxScroll = () => {
+		if (!boxRef.current) return;
 
+		console.log(numberOfTraitForms * 64)
+
+		boxRef.current?.scrollTo({ behavior: 'smooth', top: 100000 });
+	};
+
+	const handleAddTrait = () => {
+		setNumberOfTraitForms(numberOfTraitForms + 1);
+
+		if (numberOfTraitForms >= 2) {
+			handleBoxScroll();
+		}
+	}
 	const mintButtonStyles = {
 		padding: (theme: Theme) => theme.spacing(1, 3),
 		minHeight: 48,
@@ -231,12 +253,16 @@ export const MintModal = () => {
 						{`${walletAddress.slice(0, 30)}...`}
 					</Typography>
 				</DialogTitle>
-				<DialogContent dividers sx={{ backgroundColor: (theme) => theme.palette.primary.light }}>
-					<Grid container justifyContent={'center'} sx={{}}>
+				<DialogContent dividers sx={{ backgroundColor: (theme) => theme.palette.primary.light, display: { xs: 'block', md: 'flex' }, alignItems: 'center' }}>
+					<Grid container justifyContent={'center'}>
 						<div ref={svgContainerRef} dangerouslySetInnerHTML={{ __html: SVG }} />
-						<Grid container direction={'column'} justifyContent={'center'} sx={{ width: 380 }}>
-							<Spacer vertical spacing={2} />
-							<Grid container justifyContent={'center'} direction={'column'}>
+						<Grid
+							container
+							direction={'column'}
+							justifyContent={'center'}
+							sx={{ width: 380, marginLeft: { md: 8 } }}
+						>
+							<Grid container justifyContent={'center'} direction={'column'} sx={{ marginTop: { xs: 2, md: 0 } }}>
 								<Button onClick={handleMint} variant={'contained'} color={'secondary'} sx={mintButtonStyles}>
 									<Typography variant={'body1'} sx={{ fontSize: 18, color: 'black' }}>
 										Mint Your Token
@@ -286,13 +312,17 @@ export const MintModal = () => {
 								onChange={(e) => setDescription(e.target.value)}
 							/>
 							<Spacer vertical spacing={1} />
+							{/* <Box ref={boxRef} sx={{ maxHeight: 140, overflowY: 'auto' }}> */}
 							{renderForms()}
+							{/* </Box> */}
 							<Spacer vertical spacing={1} />
-							<Button variant={'contained'} onClick={() => setNumberOfTraitForms(numberOfTraitForms + 1)} sx={{ backgroundColor: (theme) => theme.palette.primary.dark }}>
-								<Typography variant={'body1'} color={'white'}>
-									{numberOfTraitForms === 0 ? 'Add a Trait?' : 'Add Another Trait?'}
-								</Typography>
-							</Button>
+							{numberOfTraitForms !== 10
+								? <Button variant={'contained'} onClick={handleAddTrait} sx={{ backgroundColor: (theme) => theme.palette.primary.dark }}>
+									<Typography variant={'body1'} color={'white'}>
+										{numberOfTraitForms === 0 ? 'Add a Trait?' : 'Add Another Trait?'}
+									</Typography>
+								</Button>
+								: null}
 							<Spacer vertical spacing={2} />
 							<FormControl>
 								<Typography variant={'body1'} textAlign={'center'} color={'white'}>
