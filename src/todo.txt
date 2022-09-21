@@ -1,28 +1,62 @@
 
+-- MINT MODAL --
+* mint radio buttons wrong color
+* input hover states
+* forms scroll on med upwards screens 
 
-/**p
-* 
- * explain more about what the nft offers - the problem is solves and the creative suite
- * on chain NFT generators for whole collections
- * input hover states
- * forms scroll on med upwards screens 
- * input for brush width
- * nav links on desktop wrong color
- * mint radio buttons wrong color
- * only deploy front end not contract
- * host
- * sort routes for url
- * GA
- * real social links 
- * copy 
- * erase should not be selectable
- * test all contract functions
- * create wallet to launch from 
- * create open sea 
- * hide discord link temporarily
- * host
- * point URL
- * check no secrets
- * navigation scroll bar
- * links to turn to acive when scroll past for mobile/tablet nav
- */
+-- TOOLS -- 
+* input for brush width
+* remove tag
+
+-- CANVAS --
+* erase should not be selectable
+
+-- FONT --
+* find new font for body 2
+
+-- COPY --
+* explain more about what the nft offers - the problem is solves and the creative suite
+* on chain NFT generators for whole collections
+* update team section - remove artist part
+
+-- LINKS --
+* images not being served
+* real social links 
+* hide discord link temporarily
+
+--  NAVIGATION --  
+* nav links on desktop wrong color
+* links to turn to active when scroll past for mobile/tablet nav
+* navigation scroll bar
+
+-- HOSTING -- 
+* host
+* point URL
+* sort routes for url
+
+-- TRACKING -- 
+* Add GA
+
+-- DEPLOYMENT --  
+* check no secrets
+* only deploy front end not contract
+
+-- WALLET --
+* name all test wallets
+* create wallet to launch from - secure it 
+
+-- CONTRACT -- 
+* test all contract functions
+* deploy contract
+* add enum for contract address
+* make test tokens to make sure it works
+* verify contract
+* add contract to social links
+
+-- MARKETPLACES --
+* create open sea 
+* create looks rare
+* hook these up to social links
+
+ -- CODE REFACTOR --
+* as and when
