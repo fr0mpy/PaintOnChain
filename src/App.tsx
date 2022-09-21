@@ -7,6 +7,7 @@ import { LayoutResolver } from "./Components/Layout/LayoutResolver";
 import { ModalResolver, ModalType } from './Components/Layout/ModalResolver';
 import { useDispatch } from 'react-redux';
 import { setModalType } from './Redux/rootSlice';
+import { CustomSnackbar } from './Components/CustomSnackbar';
 
 function App() {
 	const dispatch = useDispatch();
@@ -16,8 +17,6 @@ function App() {
 			dispatch(setModalType(ModalType.Welcome))
 		}, 2000)
 	}
-
-	const c = ''
 
 	React.useEffect(() => {
 		const welcomeModalDismissed = localStorage.getItem('welcomeModalDismissed');
@@ -30,6 +29,7 @@ function App() {
 	return (
 		<>
 			<ThemeProvider theme={theme}>
+				<CustomSnackbar />
 				<LayoutResolver />
 				<ModalResolver />
 			</ThemeProvider>

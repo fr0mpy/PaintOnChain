@@ -21,6 +21,7 @@ export interface IAppState {
 	drawerOpen: boolean;
 	modal?: ModalType;
 	section: Sections;
+	snackbar?: string
 }
 
 export const defaultColorPalette = ['black', ...Array(14).fill('white')];
@@ -43,7 +44,8 @@ export const initialState: IAppState = {
 	currentTabIndex: 0,
 	drawerOpen: false,
 	modal: undefined,
-	section: 0
+	section: 0,
+	snackbar: ''
 }
 
 export const appSlice = createSlice({
@@ -91,6 +93,9 @@ export const appSlice = createSlice({
 		},
 		setSection: (state, action: PayloadAction<Sections>) => {
 			state.section = action.payload;
+		},
+		setSnackbar: (state, action: PayloadAction<string>) => {
+			state.snackbar = action.payload;
 		}
 	},
 })
@@ -109,7 +114,8 @@ export const {
 	setCurrentTabIndex,
 	setDrawerOpen,
 	setModalType,
-	setSection
+	setSection,
+	setSnackbar
 } = appSlice.actions;
 
 export default appSlice.reducer;

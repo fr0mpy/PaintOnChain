@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogTitle, IconButton, Typography, Grid, TextF
 import CloseIcon from '@mui/icons-material/Close';
 import { Spacer } from "../../../Common/Spacer";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import { setModalType } from "../../../../Redux/rootSlice";
+import { setModalType, setSnackbar } from "../../../../Redux/rootSlice";
 import { useAppSelector } from "../../../../Redux/store";
 
 interface IMetaData {
@@ -51,13 +51,8 @@ export const MintModal = () => {
 			if (canvasElement) {
 				const width = (canvasElement.clientWidth / 2).toString();
 				const height = (canvasElement.clientHeight / 2).toString();
-				if (isMobile) {
-					svgElement[0].style.height = height;
-					svgElement[0].style.width = width;
-				} else {
-					svgElement[0].style.height = height;
-					svgElement[0].style.width = width;
-				}
+				svgElement[0].style.height = height;
+				svgElement[0].style.width = width;
 			}
 			svgElement[0].style.border = 'solid 4px rgb(160, 84, 129)';
 			svgElement[0].style.borderRadius = '4px';
@@ -154,15 +149,15 @@ export const MintModal = () => {
 		if (!(window as any).ethereum) return;
 
 		if (!name || !description) {
-			if (!name && !description) alert('please enter a name & description for your NFT');
-			else if (!name) alert('please enter a name for your NFT');
-			else if (!description) alert('please enter a description for your NFT');
+			if (!name && !description) dispatch(setSnackbar('please enter a name & description for your NFT'));
+			else if (!name) dispatch(setSnackbar('please enter a name for your NFT'));
+			else if (!description) dispatch(setSnackbar('please enter a description for your NFT'));
 
 			return;
 		}
 
 		if (walletToMintTo === WalletTypes.Friends && friendsWalletAddress.length !== 42) {
-			alert('Friends wallet address must be 42 characters in length, including the 0x prefix. Make you have not input any spaces.');
+			dispatch(setSnackbar('Friends wallet address must be 42 characters in length, including the 0x prefix. Make you have not input any spaces.'));
 		}
 
 		const mintAddress = walletToMintTo === WalletTypes.Own ? walletAddress : friendsWalletAddress;
@@ -209,6 +204,8 @@ export const MintModal = () => {
 				open
 				PaperProps={{
 					sx: {
+						height: '100%',
+						width: '100%',
 						maxHeight: '100%',
 						maxWidth: '100%',
 						margin: 0,
@@ -235,9 +232,9 @@ export const MintModal = () => {
 					</Typography>
 				</DialogTitle>
 				<DialogContent dividers sx={{ backgroundColor: (theme) => theme.palette.primary.light }}>
-					<Grid container justifyContent={'center'}>
+					<Grid container justifyContent={'center'} sx={{}}>
 						<div ref={svgContainerRef} dangerouslySetInnerHTML={{ __html: SVG }} />
-						<Grid container direction={'column'} justifyContent={'center'} sx={{ width: '380px' }}>
+						<Grid container direction={'column'} justifyContent={'center'} sx={{ width: 380 }}>
 							<Spacer vertical spacing={2} />
 							<Grid container justifyContent={'center'} direction={'column'}>
 								<Button onClick={handleMint} variant={'contained'} color={'secondary'} sx={mintButtonStyles}>

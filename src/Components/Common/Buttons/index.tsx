@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles'
-import { updateWalletAddress } from '../../../Redux/rootSlice';
+import { setSnackbar, updateWalletAddress } from '../../../Redux/rootSlice';
 import { useDispatch } from 'react-redux/';
 import { useAppSelector } from '../../../Redux/store';
 
@@ -40,7 +40,7 @@ export const ConnectWalletAndOpenMintingButton: React.FC<IConnectWalletButtonPro
 
 			});
 		} else {
-			alert('No Web3 Wallet Extension Detected. Please install MetaMask');
+			dispatch(setSnackbar('No Web3 Wallet Extension Detected. Please install MetaMask'));
 		}
 
 	}

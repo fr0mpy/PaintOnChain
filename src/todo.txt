@@ -2,6 +2,8 @@
 
 /**p
 * 
+* snackbars instead of alerts
+* input for brushwidth
  * GA
  * real social links 
  * copy 
@@ -12,4 +14,5 @@
  * hide discord link temporarily
  * host
  * point URL
+ * check no secrets
  */

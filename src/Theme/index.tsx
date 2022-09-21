@@ -20,6 +20,9 @@ export const theme = createTheme({
 		secondary: {
 			main: '#3effdb'
 		},
+		warning: {
+			main: '#FFFF00'
+		}
 
 	},
 	typography: {
