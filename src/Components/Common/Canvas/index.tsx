@@ -293,7 +293,7 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 			}}
 			id={'canvasContainer'}
 		>
-			{!canvasHeight || !canvasWidth ? <Typography variant={'body1'}>Loading Canvas...</Typography> : null}
+			{!canvasHeight || !canvasWidth ? <Typography variant={'body2'}>Loading Canvas...</Typography> : null}
 			<div style={!canvasHeight || !canvasWidth ? { position: 'absolute', left: -10000 } : { width: 'fit-content', height: 'fit-content' }}>
 				<canvas id={'canvas'} />
 			</div>

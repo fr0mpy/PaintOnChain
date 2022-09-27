@@ -1,38 +1,9 @@
--- BUTTON --
-
--- MINT MODAL --
-
--- TOOLS -- 
 
 -- CANVAS --
 * erase should not be selectable
 
--- FONT --
-
--- COPY --
-
--- LINKS --
-* images not being served ?
-* real social links 
-
 -- NAVIGATION --  
 * links to turn to active when scroll past for mobile/tablet nav
-
--- HOSTING -- 
-* host
-* point URL
-* sort routes for url
-* ensure all forward to https
-
--- TRACKING -- 
-
--- DEPLOYMENT --  
-* check no secrets
-* only deploy front end not contract
-
--- WALLET --
-* name all test wallets
-* create wallet to launch from - secure it 
 
 -- CONTRACT -- 
 * test all contract functions
@@ -41,6 +12,24 @@
 * make test tokens to make sure it works
 * verify contract
 * add contract to social links
+
+-- HOSTING -- 
+* host
+* point URL
+* sort routes for url
+* ensure all forward to https
+
+-- DEPLOYMENT --  
+* check no secrets
+* only deploy front end not contract
+
+-- LINKS --
+* images not being served ?
+* real social links 
+
+-- WALLET --
+* name all test wallets
+* create wallet to launch from - secure it 
 
 -- MARKETPLACES --
 * create open sea 

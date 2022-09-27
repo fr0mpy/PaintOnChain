@@ -12,7 +12,11 @@ export enum ModalType {
     ClearAll = 3
 }
 
-export const ModalResolver = () => {
+interface IProps {
+    canvasRef: React.MutableRefObject<fabric.Canvas | null>
+}
+
+export const ModalResolver: React.FC<IProps> = ({ canvasRef }) => {
     const { modal } = useAppSelector(state => {
         return { modal: state.rootReducer.modal }
     });
@@ -26,7 +30,7 @@ export const ModalResolver = () => {
             case ModalType.Welcome:
                 return <WelcomeModal />
             case ModalType.ClearAll:
-                return <ClearAllModal />
+                return <ClearAllModal canvasRef={canvasRef} />
             default:
                 return null;
         }

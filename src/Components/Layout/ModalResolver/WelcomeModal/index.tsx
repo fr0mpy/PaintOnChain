@@ -85,7 +85,7 @@ export const WelcomeModal = () => {
                             <CircleIcon sx={{ height: 18, width: 18, fill: (theme) => theme.palette.primary.light, marginRight: 1 }} />
                         </ListItemIcon>
                         <ListItemText
-                            primary="Mint your token to your or a friends wallet, with the image data stored on the Ethereum Blockchain!"
+                            primary="Mint your token - with all metadata stored on either the Ethereum or Arbitrum Blockchain!"
                         />
                     </ListItem>
                     <Spacer vertical spacing={2} />

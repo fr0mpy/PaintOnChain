@@ -1,5 +1,5 @@
 import TabletLayout from "../TabletLayout"
-import React from "react";
+import React, { MutableRefObject } from "react";
 import DesktopLayout from "../DesktopLayout";
 import MobileLayout from "../MobileLayout";
 
@@ -9,9 +9,12 @@ import { CanvasTools } from "../../Common/CanvasTools/";
 import { Typography, useMediaQuery } from "@mui/material";
 import { Theme } from "@mui/system";
 
-export const LayoutResolver = () => {
+interface IProps {
+	canvasRef: MutableRefObject<fabric.Canvas | null>;
+}
 
-	const canvasRef = React.useRef<fabric.Canvas | null>(null);
+export const LayoutResolver: React.FC<IProps> = ({ canvasRef }) => {
+
 	const objRef = React.useRef<fabric.Line | fabric.Triangle | fabric.Circle | fabric.Rect | null>(null);
 	const objOriginRef = React.useRef<{ x: number, y: number }>({ x: 0, y: 0 });
 

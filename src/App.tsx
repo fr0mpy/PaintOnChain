@@ -10,6 +10,8 @@ import { setModalType } from './Redux/rootSlice';
 import { CustomSnackbar } from './Components/CustomSnackbar';
 
 function App() {
+	const canvasRef = React.useRef<fabric.Canvas | null>(null);
+
 	const dispatch = useDispatch();
 
 	const renderWelcomeModal = () => {
@@ -30,8 +32,8 @@ function App() {
 		<>
 			<ThemeProvider theme={theme}>
 				<CustomSnackbar />
-				<LayoutResolver />
-				<ModalResolver />
+				<LayoutResolver canvasRef={canvasRef} />
+				<ModalResolver canvasRef={canvasRef} />
 			</ThemeProvider>
 		</>
 	);

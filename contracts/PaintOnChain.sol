@@ -6,6 +6,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 library Base64 {
+
     string internal constant TABLE_ENCODE =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
     bytes internal constant TABLE_DECODE =
@@ -172,6 +173,8 @@ library Base64 {
 contract PAINT_ON_CHAIN is ERC721, ERC721Enumerable, Ownable {
     mapping(uint256 => Token) public tokens;
 
+    address authContractAddress;
+
     uint256 numberOfTokensCreated = 0;
     uint256 numberOfTokensBurned = 0;
 
@@ -257,8 +260,20 @@ contract PAINT_ON_CHAIN is ERC721, ERC721Enumerable, Ownable {
         return numberOfTokensBurned;
     }
 
-    function userBlance() public view returns (uint256) {
+    function getWalletTokenBalance() public view returns (uint256) {
         return balanceOf(msg.sender);
+    }
+
+    function setAuthContractAddress(address _contractAddress) onlyOwner public {
+        authContractAddress = _contractAddress;
+    }
+
+    function getAuthContractAddress() public view returns (address) {
+        return authContractAddress;
+    }
+
+    function walletHoldsAuthToken() public view returns (bool) {
+        return IERC721(authContractAddress).balanceOf(msg.sender) > 0;
     }
 
     function tokenURI(uint256 tokenId)
