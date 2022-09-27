@@ -7,42 +7,39 @@ const RoadMap: React.FC = () => {
 	return (
 		<Section>
 			<Typography variant={'body1'}>
-				Currently this project is well in it's infancy. There's many things to smooth out and some bugs to squash, however...			</Typography>
-			<Spacer vertical spacing={1} />
-			<Typography variant={'body1'}>
-				The idea is to keep iterating over the current build and it's features, to make the tool the best it can be.
+				The current build of Paint On Chain which is open to all users will not change all too much. As the main goal will be working on the full creation suite, which will be exclusive to our NFT holders only.
 			</Typography>
 			<Spacer vertical spacing={1} />
 			<Typography variant={'body1'}>
-				The first the goals are to grow the user base of the product, the community and the NFT Launch.
+				The creation suite will have a range of tools, features and extras for holders to be able to create on-chain artwork and even their own on-chain NFT collections - including their own contract.
 			</Typography>
 			<Spacer vertical spacing={1} />
 			<Typography variant={'body1'}>
-				We'll continue to grow our twitter and once we hit around 3,000 followers the Discord will open! All welcome!
+				To get to our funding goals and be able to build the creation suite, first we'll be growing the community and user base of Paint On Chain. Gathering feedback as we do so.
 			</Typography>
 			<Spacer vertical spacing={1} />
 			<Typography variant={'body1'}>
-				The NFT launch is in idea phase at the moment - thoughts on artwork (on chain, of course, duh) and contract structure. The launch will start with the Ethereum blockchain and more details will be posted soon.
+				We'll continue to grow our Twitter and once we hit around 3,000 followers the Discord will open. All welcome!
 			</Typography>
 			<Spacer vertical spacing={1} />
 			<Typography variant={'body1'}>
-				There will also be a launches on other blockchains, but for now Ethereum is the focus.
+				Alongside this will be our focus of our NFT launch. There's a lot more information to come on this (artwork, dates/times, cost, contract structure etc ), so please bear with. More details will be posted soon!
 			</Typography>
 			<Spacer vertical spacing={1} />
 			<Typography variant={'body1'}>
-				The NFT launch will help fund the project long term. And make this tool and the future team around it, the best it can be.
+				This NFT launch will help fund the project long term. And make this creation suite and the future team around it, the best it can be.
 			</Typography>
 			<Spacer vertical spacing={1} />
 			<Typography variant={'body1'}>
-				Position openings for things such as community management, design and developer will follow too!
+				Position openings for things such as community management, design and development will follow too!
 			</Typography>
 			<Spacer vertical spacing={1} />
 			<Typography variant={'body1'}>
-				We can then begin iterating over the project and tools we currently offer our NFT holders and community.
+				From here we can then begin iterating over the project and it's tools & features.
 			</Typography>
 			<Spacer vertical spacing={1} />
 			<Typography variant={'body1'}>
-				There are many ideas so far on what more we can add... and really, the potential is seemingly endless. But some that are a priority are the following:
+				There are many ideas on what more we can add... and really, the potential is seemingly endless. But some which are a priority are:
 			</Typography>
 			<Spacer vertical spacing={1} />
 			<Typography variant={'body1'}>
@@ -61,10 +58,10 @@ const RoadMap: React.FC = () => {
 				- Cropping & Rotating the Canvas
 			</Typography>
 			<Typography variant={'body1'}>
-				- Banner Art Creation
+				- Set Canvas Size & Aspect Ratio
 			</Typography>
 			<Typography variant={'body1'}>
-				- Set Canvas Size & Aspect Ratio
+				- Banner Art Creation
 			</Typography>
 			<Typography variant={'body1'}>
 				- Upgrade the Website Into A Progressive Web App (for offline capabilities)
@@ -78,7 +75,7 @@ const RoadMap: React.FC = () => {
 			</Typography>
 			<Spacer vertical spacing={1} />
 			<Typography variant={'body1'}>
-				It would also be amazing the gather feedback from project users and add these ideas in too. So please, feel free to get in contact about them!
+				Of course we'll also be gathering feedback from users too. Feel free to get in contact about anything you'd like to see!
 			</Typography>
 			<Spacer vertical spacing={1} />
 			<Typography variant={'body1'}>

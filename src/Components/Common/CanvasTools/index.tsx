@@ -3,6 +3,7 @@ import { useMediaQuery } from "@mui/material";
 import { Theme } from "@mui/system";
 import { ChangeEvent } from "react";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
+import throttle from "../../../helpers/events";
 import { setIsDrawingMode, setTool, setBrushColor, setSVG, setModalType, setObjectSelection, setBrushWidth, setShapeFill, setColorPallette, defaultColorPalette } from "../../../Redux/rootSlice";
 import { useAppSelector } from "../../../Redux/store";
 import { ModalType } from "../../Layout/ModalResolver";
@@ -29,11 +30,13 @@ export const CanvasTools: React.FC<IProps> = ({ canvasRef, objOriginRef, objRef,
 	const {
 		tool,
 		brushColor,
+		brushWidth,
 		objectSelection,
 	} = useAppSelector(state => {
 		return {
 			tool: state.rootReducer.tool,
 			brushColor: state.rootReducer.brushColor,
+			brushWidth: state.rootReducer.brushWidth,
 			objectSelection: state.rootReducer.objectSelection,
 		}
 	});
@@ -57,23 +60,7 @@ export const CanvasTools: React.FC<IProps> = ({ canvasRef, objOriginRef, objRef,
 	};
 
 	const handleClear = () => {
-
-		const isConfirmed = window.confirm('Are you sure? This will completely reset the canvas, color pallette and save state');
-
-		if (!canvasRef.current || !isConfirmed) return;
-
-		else if (isConfirmed) {
-			canvasRef.current.getObjects().forEach(o => {
-				canvasRef.current?.remove(o);
-			})
-
-			dispatch(setColorPallette(defaultColorPalette))
-			localStorage.removeItem('canvasData');
-			localStorage.removeItem('colorsData');
-			localStorage.removeItem('brushColor');
-			localStorage.removeItem('brushWidth');
-
-		}
+		dispatch(setModalType(ModalType.ClearAll))
 	};
 
 	const handleErase = () => {
@@ -96,11 +83,13 @@ export const CanvasTools: React.FC<IProps> = ({ canvasRef, objOriginRef, objRef,
 	const handleUndo = () => {
 		if (!canvasRef.current) return;
 		(canvasRef.current as any).undo();
+		handleSave();
 	};
 
 	const handleRedo = () => {
 		if (!canvasRef.current) return;
 		(canvasRef.current as any).redo();
+		handleSave();
 	};
 
 	const handleToSVG = () => {
@@ -181,12 +170,33 @@ export const CanvasTools: React.FC<IProps> = ({ canvasRef, objOriginRef, objRef,
 	};
 
 	const handleBrushWidth = (event: Event, value: number | number[]) => {
-		dispatch(setBrushWidth(value as number));
-		localStorage.setItem('brushWidth', value.toString());
+		throttle(() => {
+			dispatch(setBrushWidth(value as number));
+			localStorage.setItem('brushWidth', value.toString());
+		}, 100)
+	};
+
+	const handleBrushWidthInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+		dispatch(setBrushWidth(Number(event.target.value)));
+		localStorage.setItem('brushWidth', event.target.value);
+	};
+
+	const handleInputBlur = () => {
+		if (brushWidth < 1) {
+			dispatch(setBrushWidth(1));
+		} else if (brushWidth > 100) {
+			dispatch(setBrushWidth(100));
+		}
 	};
 
 	const handleShapeFill = (event: ChangeEvent<HTMLInputElement>, fill: boolean) => {
 		dispatch(setShapeFill(fill));
+	};
+
+	const handleSave = () => {
+		if (!canvasRef.current) return;
+		const canvasDataJSON = JSON.stringify(canvasRef.current);
+		localStorage.setItem('canvasData', canvasDataJSON);
 	};
 
 	return (
@@ -205,6 +215,8 @@ export const CanvasTools: React.FC<IProps> = ({ canvasRef, objOriginRef, objRef,
 					handleSquare={handleSquare}
 					handleObjSelection={handleObjSelection}
 					handleBrushWidth={handleBrushWidth}
+					handleBrushWidthInput={handleBrushWidthInput}
+					handleInputBlur={handleInputBlur}
 					handleShapeFill={handleShapeFill}
 				/>
 				: null}
@@ -222,6 +234,8 @@ export const CanvasTools: React.FC<IProps> = ({ canvasRef, objOriginRef, objRef,
 					handleSquare={handleSquare}
 					handleObjSelection={handleObjSelection}
 					handleBrushWidth={handleBrushWidth}
+					handleBrushWidthInput={handleBrushWidthInput}
+					handleInputBlur={handleInputBlur}
 					handleShapeFill={handleShapeFill}
 				/>
 				: null}
@@ -239,6 +253,8 @@ export const CanvasTools: React.FC<IProps> = ({ canvasRef, objOriginRef, objRef,
 					handleSquare={handleSquare}
 					handleObjSelection={handleObjSelection}
 					handleBrushWidth={handleBrushWidth}
+					handleBrushWidthInput={handleBrushWidthInput}
+					handleInputBlur={handleInputBlur}
 					handleShapeFill={handleShapeFill}
 				/>
 				: null}

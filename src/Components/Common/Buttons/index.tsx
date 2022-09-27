@@ -12,6 +12,10 @@ export const StyledConnectWalletButton = styled(Button)(({ theme }) => ({
 	color: 'white',
 	border: 'solid 5px white',
 	borderRadius: theme.spacing(1),
+	[theme.breakpoints.up('sm')]: {
+		height: 56,
+		minWidth: 160
+	}
 }))
 
 interface IConnectWalletButtonProps {
@@ -40,7 +44,7 @@ export const ConnectWalletAndOpenMintingButton: React.FC<IConnectWalletButtonPro
 
 			});
 		} else {
-			dispatch(setSnackbar('No Web3 Wallet Extension Detected. Please install MetaMask'));
+			dispatch(setSnackbar({ message: 'No Web3 Wallet Extension Detected. Please install MetaMask', duration: 6000 }));
 		}
 
 	}
@@ -55,7 +59,7 @@ export const ConnectWalletAndOpenMintingButton: React.FC<IConnectWalletButtonPro
 						disableElevation
 						color={'secondary'}
 					>
-						<Typography variant={'body1'} color={'black'}>
+						<Typography variant={'body2'} color={'black'}>
 							Add MetaData & Mint
 						</Typography>
 					</StyledConnectWalletButton>
@@ -69,7 +73,7 @@ export const ConnectWalletAndOpenMintingButton: React.FC<IConnectWalletButtonPro
 					disableElevation
 					color={'primary'}
 				>
-					<Typography variant={'body1'}>
+					<Typography variant={'body2'}>
 						Connect
 					</Typography>
 				</StyledConnectWalletButton>

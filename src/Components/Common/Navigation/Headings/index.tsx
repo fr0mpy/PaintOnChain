@@ -34,7 +34,7 @@ export const Headings = () => {
                         <Typography variant={"body1"} textAlign={'center'} sx={{
                             opacity: active ? 1 : .7,
                             fontSize: { sm: 20, md: 20 },
-                            color: { xs: 'white', lg: (theme) => theme.palette.primary.main }
+                            color: { xs: 'white', lg: '#e579b9' }
                         }}>
                             {heading}
                         </Typography>

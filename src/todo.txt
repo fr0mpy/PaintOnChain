@@ -1,41 +1,30 @@
+-- BUTTON --
 
 -- MINT MODAL --
-* mint radio buttons wrong color
-* input hover states
-* forms scroll on med upwards screens 
 
 -- TOOLS -- 
-* input for brush width
-* remove tag
 
 -- CANVAS --
 * erase should not be selectable
 
 -- FONT --
-* find new font for body 2
 
 -- COPY --
-* explain more about what the nft offers - the problem is solves and the creative suite
-* on chain NFT generators for whole collections
-* update team section - remove artist part
 
 -- LINKS --
-* images not being served
+* images not being served ?
 * real social links 
-* hide discord link temporarily
 
---  NAVIGATION --  
-* nav links on desktop wrong color
+-- NAVIGATION --  
 * links to turn to active when scroll past for mobile/tablet nav
-* navigation scroll bar
 
 -- HOSTING -- 
 * host
 * point URL
 * sort routes for url
+* ensure all forward to https
 
 -- TRACKING -- 
-* Add GA
 
 -- DEPLOYMENT --  
 * check no secrets
@@ -58,5 +47,5 @@
 * create looks rare
 * hook these up to social links
 
- -- CODE REFACTOR --
+-- CODE REFACTOR --
 * as and when

@@ -25,8 +25,8 @@ const Navigation = () => {
 	return (
 		<DrawerComponent anchor={'left'}>
 			<NavContainer id={'leftCol'} direction={'column'} justifyContent={'center'}>
-				<Typography variant={'h3'} textAlign={'center'}>
-					Paint On Chain
+				<Typography variant={'h4'} sx={{ fontSize: 42 }} textAlign={'center'}>
+					PAINT ON CHAIN
 				</Typography>
 				<Spacer vertical spacing={1} />
 				<Grid container direction={'row'} justifyContent={'center'}>

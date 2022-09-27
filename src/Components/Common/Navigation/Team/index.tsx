@@ -16,18 +16,13 @@ const Team: React.FC = () => {
 					fontWeight: 900,
 					cursor: 'pointer !important',
 					textDecoration: 'none'
-				}}> Frompy </a>and I'm a web developer and kind of an artist? Idk. What my code produces is my art,
-				but you could say that about anything really. So maybe i'm not, who knows?
-			</Typography>
-			<Spacer vertical spacing={1} />
-			<Typography variant={'body1'}>
-				But anyway,
+				}}> Frompy </a>and I'm a web developer, gamer and martial arts enthusiast.
 			</Typography>
 			<Spacer vertical spacing={1} />
 			<Typography variant={'body1'}>
 				I became hooked by the internet as a 5 year old kid sometime around
 				1997 when my dad first showed me his new computer - A machine
-				running Windows 95', Paint... and the revolutionary new web browser: Internet
+				running Windows 95' and the revolutionary new web browser: Internet
 				Explorer. It was incredible.
 			</Typography>
 			<Spacer vertical spacing={1} />

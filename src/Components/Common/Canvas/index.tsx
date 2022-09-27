@@ -18,7 +18,7 @@ interface IProps {
 
 const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objOriginRef, objRef }) => {
 	const dispatch = useDispatch();
-
+	const erasedItems = React.useRef<Array<any>>([]);
 	const [{ canvasHeight, canvasWidth }, setCanvasSize] = React.useState<{ canvasHeight: number, canvasWidth: number }>({ canvasHeight: 0, canvasWidth: 0 });
 	const [loaded, setLoaded] = React.useState<boolean>(false);
 
@@ -101,7 +101,10 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 			canvasRef.current.renderAll();
 		}
 
-		canvasRef.current.forEachObject(o => { o.selectable = objectSelection; o.evented = objectSelection });
+		canvasRef.current.forEachObject(o => {
+			// check is in eerased items
+			o.selectable = objectSelection; o.evented = objectSelection
+		});
 		canvasRef.current.freeDrawingBrush.width = brushWidth;
 		canvasRef.current.freeDrawingBrush.color = tool === 'erase' ? 'white' : brushColor;
 
@@ -113,6 +116,11 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 			switch (tool) {
 				case 'draw':
 					canvasRef.current.isDrawingMode = true;
+					break;
+
+				case 'erase':
+					console.log(canvasRef.current.item(0))
+					erasedItems.current.push(canvasRef.current.item(0));
 					break;
 				case 'line':
 					if (!e.pointer || !drawingObjRef.current) return;
@@ -226,6 +234,7 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 			}
 		});
 		canvasRef.current.on('mouse:up', () => {
+
 			mousedownRef.current = false;
 			objRef.current = null;
 			handleSave();

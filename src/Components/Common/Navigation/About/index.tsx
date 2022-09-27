@@ -8,19 +8,23 @@ const About: React.FC = () => {
 	return (
 		<Section>
 			<Typography variant={'body1'}>
-				Welcome to Paint On Chain! The worlds first on chain NFT art creator.
+				Welcome to Paint On Chain! The worlds first on chain NFT art creation suite.
 			</Typography>
 			<Spacer vertical spacing={1} />
 			<Typography variant={'body1'}>
-				Simply connect your wallet, draw your art on the canvas and then mint it - with the art being stored ON either the Ethereum blockchain!
+				Simply connect your wallet, draw your art on the canvas and then mint it - with the art being stored ON the Ethereum blockchain!
 			</Typography>
 			<Spacer vertical spacing={1} />
 			<Typography variant={'body1'}>
-				And there's no fee's for minting art! Only gas!
+				You can mint art to your own wallet or to a friends.
 			</Typography>
 			<Spacer vertical spacing={1} />
 			<Typography variant={'body1'}>
-				There are huge plans for this project, including our upcoming NFT launch, which will give holders even more tools and extras to create their art with - which you can read more about in the Roadmap and FAQ's.
+				We charge no fee for this, you'll only need to pay for the gas.
+			</Typography>
+			<Spacer vertical spacing={1} />
+			<Typography variant={'body1'}>
+				This current version of Paint On Chain will always be open to the public use. However the full creation suite we plan on building using funds raised through our NFT launch, will only be accessible by holders of our NFT - You can read more about this in our RoadMap.
 			</Typography>
 			<Spacer vertical spacing={1} />
 			<Typography variant={'body1'}>

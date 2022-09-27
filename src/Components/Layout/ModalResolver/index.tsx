@@ -1,5 +1,6 @@
 import Backdrop from "@mui/material/Backdrop/Backdrop";
 import { useAppSelector } from "../../../Redux/store";
+import { ClearAllModal } from "./ClearAllModal";
 import { MenuModal } from "./MenuModal";
 import { MintModal } from "./MintModal";
 import { WelcomeModal } from "./WelcomeModal";
@@ -7,7 +8,8 @@ import { WelcomeModal } from "./WelcomeModal";
 export enum ModalType {
     Mint = 0,
     Menu = 1,
-    Welcome = 2
+    Welcome = 2,
+    ClearAll = 3
 }
 
 export const ModalResolver = () => {
@@ -23,6 +25,8 @@ export const ModalResolver = () => {
                 return <MenuModal />
             case ModalType.Welcome:
                 return <WelcomeModal />
+            case ModalType.ClearAll:
+                return <ClearAllModal />
             default:
                 return null;
         }

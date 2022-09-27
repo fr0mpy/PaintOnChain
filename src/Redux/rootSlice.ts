@@ -1,6 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import React from 'react';
 import { Sections } from '../Components/Common/Navigation/Headings';
 import { ModalType } from '../Components/Layout/ModalResolver';
+
+export interface ISnackBar {
+	message: string;
+	duration?: number;
+	action?: React.ReactNode;
+};
 
 export interface IAppState {
 	value: number;
@@ -21,7 +28,7 @@ export interface IAppState {
 	drawerOpen: boolean;
 	modal?: ModalType;
 	section: Sections;
-	snackbar?: string
+	snackbar?: ISnackBar;
 }
 
 export const defaultColorPalette = ['black', ...Array(14).fill('white')];
@@ -45,7 +52,7 @@ export const initialState: IAppState = {
 	drawerOpen: false,
 	modal: undefined,
 	section: 0,
-	snackbar: ''
+	snackbar: { message: '' }
 }
 
 export const appSlice = createSlice({
@@ -94,7 +101,7 @@ export const appSlice = createSlice({
 		setSection: (state, action: PayloadAction<Sections>) => {
 			state.section = action.payload;
 		},
-		setSnackbar: (state, action: PayloadAction<string>) => {
+		setSnackbar: (state, action: PayloadAction<ISnackBar>) => {
 			state.snackbar = action.payload;
 		}
 	},

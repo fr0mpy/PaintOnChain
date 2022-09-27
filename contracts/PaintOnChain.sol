@@ -170,7 +170,6 @@ library Base64 {
 }
 
 contract PAINT_ON_CHAIN is ERC721, ERC721Enumerable, Ownable {
-    // mapping(string => bool) private takenNames;
     mapping(uint256 => Token) public tokens;
 
     uint256 numberOfTokensCreated = 0;

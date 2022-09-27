@@ -42,8 +42,8 @@ const TabletLayout: React.FC<IProps> = ({ canvasRef, canvas, tools }) => {
 					<IconButton sx={{ padding: 0, marginRight: 4 }} onClick={openMenu}>
 						<MenuIcon sx={{ color: 'white', height: 46, width: 46 }} />
 					</IconButton>
-					<Typography variant={'h3'} textAlign={'center'} sx={{ height: 'fit-content' }}>
-						Paint On Chain
+					<Typography variant={'h4'} textAlign={'center'} sx={{ height: 'fit-content' }}>
+						PAINT ON CHAIN
 					</Typography>
 				</Grid>
 				<ConnectWalletAndOpenMintingButton handleMint={handleMint} />

@@ -52,7 +52,7 @@ export const WelcomeModal = () => {
                 TransitionComponent={Transition}
             >
                 <DialogContent dividers sx={{ backgroundColor: (theme) => theme.palette.primary.dark }}>
-                    <Typography variant={isMobile ? 'h4' : 'h3'} sx={{ color: 'white' }}>
+                    <Typography variant={isMobile ? 'h4' : 'h4'} sx={{ color: 'white' }}>
                         Hello! And welcome to Paint On Chain ✌️
                     </Typography>
                     <Spacer vertical spacing={isMobile ? 2 : 4} />
@@ -94,8 +94,8 @@ export const WelcomeModal = () => {
                     </Typography>
                     <Spacer vertical spacing={isMobile ? 2 : 4} />
                     <Grid container direction={'column'} justifyContent={'center'} alignItems={'center'}>
-                        <Button variant={'contained'} color={'secondary'} disableElevation onClick={handleClose} sx={{ width: 140, height: 48, border: 'solid 4px white' }}>
-                            <Typography variant={'body1'}>
+                        <Button variant={'contained'} color={'secondary'} disableElevation onClick={handleClose} sx={{ width: 180, borderRadius: 2, height: 56, border: 'solid 4px white' }}>
+                            <Typography variant={'body2'}>
                                 Okay, cool
                             </Typography>
                         </Button>

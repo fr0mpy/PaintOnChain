@@ -59,6 +59,12 @@ export const MintModal = () => {
 		}
 	}, [loaded]);
 
+	React.useEffect(() => {
+		if (numberOfTraitForms >= 2) {
+			handleBoxScroll();
+		}
+	}, [numberOfTraitForms]);
+
 	const { SVG, walletAddress, contractAddress } = useAppSelector(state => {
 		return {
 			SVG: state.rootReducer.SVG,
@@ -66,7 +72,6 @@ export const MintModal = () => {
 			contractAddress: state.rootReducer.contractAddress
 		}
 	});
-
 
 	const renderForms = () => {
 		return [...Array(numberOfTraitForms)].map((_, i) => {
@@ -82,11 +87,17 @@ export const MintModal = () => {
 							inputProps={{
 								sx: {
 									"&::placeholder": {
-										color: 'white'
+										color: 'black'
 									}
 								}
 							}}
-							sx={{ '& .MuiOutlinedInput-notchedOutline': { borderColor: 'white' }, '& .MuiFormLabel-root': { color: (theme) => theme.palette.primary.dark }, marginRight: (theme) => theme.spacing(1) }}
+							sx={{
+								'& .MuiOutlinedInput-notchedOutline': { border: '2px solid white' },
+								'& .MuiFormLabel-root': { color: (theme) => theme.palette.primary.dark },
+								'legend': { color: (theme) => theme.palette.primary.dark },
+								marginRight: (theme) => theme.spacing(1),
+
+							}}
 							value={traits[i] ? traits[i].trait_type : ''}
 							label={'Trait Name'}
 							placeholder={'Add Trait Name'}
@@ -101,11 +112,16 @@ export const MintModal = () => {
 							inputProps={{
 								sx: {
 									"&::placeholder": {
-										color: 'white'
+										color: 'black'
 									}
 								}
 							}}
-							sx={{ '& .MuiOutlinedInput-notchedOutline': { borderColor: 'white' }, '& .MuiFormLabel-root': { color: (theme) => theme.palette.primary.dark } }}
+							sx={{
+								'& .MuiOutlinedInput-notchedOutline': { border: '2px solid white' },
+								'& .MuiFormLabel-root': { color: (theme) => theme.palette.primary.dark },
+								'legend': { color: (theme) => theme.palette.primary.dark },
+								marginRight: (theme) => theme.spacing(1)
+							}}
 							value={traits[i] ? traits[i].value : ''}
 							label={'Trait Value'}
 							placeholder={'Add Trait Value'}
@@ -116,7 +132,7 @@ export const MintModal = () => {
 					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<IconButton
 							onClick={() => handleRemoveTrait(i)}
-							sx={{ color: 'white', padding: (theme) => theme.spacing(0, 0, 0, 1) }}
+							sx={{ color: 'white', padding: (theme) => theme.spacing(1) }}
 						>
 							<CloseIcon />
 						</IconButton>
@@ -157,15 +173,15 @@ export const MintModal = () => {
 		if (!(window as any).ethereum) return;
 
 		if (!name || !description) {
-			if (!name && !description) dispatch(setSnackbar('please enter a name & description for your NFT'));
-			else if (!name) dispatch(setSnackbar('please enter a name for your NFT'));
-			else if (!description) dispatch(setSnackbar('please enter a description for your NFT'));
+			if (!name && !description) dispatch(setSnackbar({ message: 'please enter a name & description for your NFT', duration: 6000 }));
+			else if (!name) dispatch(setSnackbar({ message: 'please enter a name for your NFT', duration: 6000 }));
+			else if (!description) dispatch(setSnackbar({ message: 'please enter a description for your NFT', duration: 6000 }));
 
 			return;
 		}
 
 		if (walletToMintTo === WalletTypes.Friends && friendsWalletAddress.length !== 42) {
-			dispatch(setSnackbar('Friends wallet address must be 42 characters in length, including the 0x prefix. Make you have not input any spaces.'));
+			dispatch(setSnackbar({ message: 'Friends wallet address must be 42 characters in length, including the 0x prefix. Make you have not input any spaces.', duration: 6000 }));
 		}
 
 		const mintAddress = walletToMintTo === WalletTypes.Own ? walletAddress : friendsWalletAddress;
@@ -200,10 +216,6 @@ export const MintModal = () => {
 
 	const handleAddTrait = () => {
 		setNumberOfTraitForms(numberOfTraitForms + 1);
-
-		if (numberOfTraitForms >= 2) {
-			handleBoxScroll();
-		}
 	}
 	const mintButtonStyles = {
 		padding: (theme: Theme) => theme.spacing(1, 3),
@@ -217,7 +229,6 @@ export const MintModal = () => {
 		display: 'flex',
 		flexFlow: 'column'
 	}
-	const radioStyles = { '& .Mui-checked': { color: 'white' }, '.MuiSvgIcon-root': { color: 'white' } }
 
 	return (
 		<>
@@ -246,7 +257,7 @@ export const MintModal = () => {
 							<CloseIcon fontSize={'large'} sx={{ color: 'white' }} />
 						</IconButton>
 					</Grid>
-					<Typography variant={'body1'} textAlign={'center'} sx={{ margin: (theme) => theme.spacing(0, 3) }}>
+					<Typography variant={'body2'} textAlign={'center'} sx={{ margin: (theme) => theme.spacing(0, 3) }}>
 						Connected as:
 					</Typography>
 					<Typography variant={'body1'} textAlign={'center'} sx={{ margin: (theme) => theme.spacing(0, 3) }}>
@@ -264,10 +275,10 @@ export const MintModal = () => {
 						>
 							<Grid container justifyContent={'center'} direction={'column'} sx={{ marginTop: { xs: 2, md: 0 } }}>
 								<Button onClick={handleMint} variant={'contained'} color={'secondary'} sx={mintButtonStyles}>
-									<Typography variant={'body1'} sx={{ fontSize: 18, color: 'black' }}>
+									<Typography variant={'body2'} >
 										Mint Your Token
 									</Typography>
-									<Typography variant={'body1'} sx={{ fontSize: 12, color: 'black' }}>
+									<Typography variant={'body1'} sx={{ fontSize: 12 }}>
 										(On the Ethereum blockchain!)
 									</Typography>
 								</Button>
@@ -284,11 +295,16 @@ export const MintModal = () => {
 								inputProps={{
 									sx: {
 										"&::placeholder": {
-											color: 'white'
+											color: 'black'
 										}
 									}
 								}}
-								sx={{ '& .MuiOutlinedInput-notchedOutline': { borderColor: 'white' }, '& .MuiFormLabel-root': { color: (theme) => theme.palette.primary.dark } }}
+								sx={{
+									'& .MuiOutlinedInput-notchedOutline': { border: '2px solid white' },
+									'& .MuiFormLabel-root': { color: (theme) => theme.palette.primary.dark },
+									'legend': { color: (theme) => theme.palette.primary.dark },
+									marginRight: (theme) => theme.spacing(1)
+								}}
 								value={name}
 								label={'Token Name'}
 								placeholder={'Enter a Name For Your Token'}
@@ -301,31 +317,36 @@ export const MintModal = () => {
 								inputProps={{
 									sx: {
 										"&::placeholder": {
-											color: 'white'
-										}
+											color: 'black'
+										},
 									}
 								}}
-								sx={{ '& .MuiOutlinedInput-notchedOutline': { borderColor: 'white' }, '& .MuiFormLabel-root': { color: (theme) => theme.palette.primary.dark } }}
+								sx={{
+									'& .MuiOutlinedInput-notchedOutline': { border: '2px solid white' },
+									'& .MuiFormLabel-root': { color: (theme) => theme.palette.primary.dark },
+									'legend': { color: (theme) => theme.palette.primary.dark },
+									marginRight: (theme) => theme.spacing(1)
+								}}
 								value={description}
 								label={'Token Description'}
 								placeholder={'Enter A Description For Your Token'}
 								onChange={(e) => setDescription(e.target.value)}
 							/>
 							<Spacer vertical spacing={1} />
-							{/* <Box ref={boxRef} sx={{ maxHeight: 140, overflowY: 'auto' }}> */}
-							{renderForms()}
-							{/* </Box> */}
+							<Box ref={boxRef} sx={{ maxHeight: 120, overflowY: 'auto', padding: (theme: Theme) => theme.spacing(.5, 0) }}>
+								{renderForms()}
+							</Box>
 							<Spacer vertical spacing={1} />
 							{numberOfTraitForms !== 10
-								? <Button variant={'contained'} onClick={handleAddTrait} sx={{ backgroundColor: (theme) => theme.palette.primary.dark }}>
-									<Typography variant={'body1'} color={'white'}>
+								? <Button variant={'contained'} disableElevation onClick={handleAddTrait} sx={{ backgroundColor: (theme) => theme.palette.primary.dark, '&:hover': { backgroundColor: (theme) => theme.palette.primary.main, color: 'black' } }}>
+									<Typography variant={'body2'} color={'white'}>
 										{numberOfTraitForms === 0 ? 'Add a Trait?' : 'Add Another Trait?'}
 									</Typography>
 								</Button>
 								: null}
 							<Spacer vertical spacing={2} />
 							<FormControl>
-								<Typography variant={'body1'} textAlign={'center'} color={'white'}>
+								<Typography variant={'body1'} color={'white'} sx={{ fontSize: 18 }} textAlign={'center'}>
 									Where are you minting to?
 								</Typography>
 								<RadioGroup
@@ -336,8 +357,18 @@ export const MintModal = () => {
 									row
 									sx={{ display: 'flex', justifyContent: 'center', color: 'white' }}
 								>
-									<FormControlLabel value={WalletTypes.Own} control={<Radio sx={radioStyles} />} sx={radioStyles} label={<Typography variant={"caption"}>My Currently Connected Wallet</Typography>} />
-									<FormControlLabel value={WalletTypes.Friends} control={<Radio sx={radioStyles} />} sx={radioStyles} label={<Typography variant={"caption"}>A Friends Wallet</Typography>} />
+									<FormControlLabel
+										value={WalletTypes.Own}
+										control={<Radio sx={{ '.MuiSvgIcon-root': { color: (theme) => theme.palette.primary.dark } }} />}
+										sx={{ '.MuiSvgIcon-root': { color: (theme) => theme.palette.primary.dark } }}
+										label={<Typography variant={"caption"}>My Currently Connected Wallet</Typography>}
+									/>
+									<FormControlLabel
+										value={WalletTypes.Friends}
+										control={<Radio sx={{ '.MuiSvgIcon-root': { color: (theme) => theme.palette.primary.dark } }} />}
+										sx={{ '.MuiSvgIcon-root': { color: (theme) => theme.palette.primary.dark } }}
+										label={<Typography variant={"caption"}>A Friends Wallet</Typography>}
+									/>
 								</RadioGroup>
 							</FormControl>
 							<Spacer vertical spacing={1} />
@@ -349,11 +380,16 @@ export const MintModal = () => {
 										inputProps={{
 											sx: {
 												"&::placeholder": {
-													color: 'white'
+													color: 'black'
 												}
 											}
 										}}
-										sx={{ '& .MuiOutlinedInput-notchedOutline': { borderColor: 'white' }, '& .MuiFormLabel-root': { color: (theme) => theme.palette.primary.dark } }}
+										sx={{
+											'& .MuiOutlinedInput-notchedOutline': { border: '2px solid white' },
+											'& .MuiFormLabel-root': { color: (theme) => theme.palette.primary.dark },
+											'legend': { color: (theme) => theme.palette.primary.dark },
+											marginRight: (theme) => theme.spacing(1)
+										}}
 										value={friendsWalletAddress}
 										label={'Friends Wallet Address'}
 										placeholder={'Enter A Friends Ethereum Wallet Address'}
@@ -362,7 +398,7 @@ export const MintModal = () => {
 									<Spacer vertical spacing={1} />
 								</>
 								: null}
-							<Typography textAlign={'center'} variant={'caption'} color={'white'}>
+							<Typography textAlign={'center'} variant={'caption'} sx={{ fontSize: 12, color: 'white' }}>
 								Make sure all the above is correct! Once this is minted, it's on the blockchain like this forever!
 							</Typography>
 							<Spacer vertical spacing={4} />

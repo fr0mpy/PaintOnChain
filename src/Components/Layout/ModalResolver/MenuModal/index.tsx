@@ -42,7 +42,7 @@ export const MenuModal = () => {
 						flex: 1,
 						marginLeft: 4
 					}}>
-						Paint On Chain
+						PAINT ON CHAIN
 					</Typography>
 					<IconButton
 						aria-label="close"

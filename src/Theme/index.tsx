@@ -32,13 +32,29 @@ export const theme = createTheme({
 			fontWeight: 900
 		},
 		body2: {
-			fontFamily: 'Anton, sans-serif',
-			fontWeight: 900
+			fontFamily: 'Archivo Black, sans-serif',
+			fontWeight: 900,
+			fontSize: 18
 		},
 		caption: {
 			fontFamily: 'Roboto Slab, serif',
 			fontWeight: 500,
 			fontSize: 14
+		},
+		subtitle1: {
+			fontFamily: 'Archivo Black, sans-serif',
+			fontWeight: 500,
+			fontSize: 14
+		},
+		h4: {
+			fontFamily: 'Archivo Black, sans-serif',
+			fontWeight: 900,
+			fontSize: 38
+		},
+		h3: {
+			fontFamily: 'Archivo Black, sans-serif',
+			fontWeight: 900,
+			fontSize: 26
 		}
 	}
 });

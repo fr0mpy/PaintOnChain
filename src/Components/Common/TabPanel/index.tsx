@@ -22,9 +22,10 @@ const TabPanel = (props: TabPanelProps) => {
             id={`tools-tabpanel-${index}`}
             aria-labelledby={`tools-tab-${index}`}
             {...other}
+            style={{ minHeight: 356 }}
         >
             {value === index && (
-                <Box sx={{ p: (theme) => theme.spacing(2, 1, 1, 1), minHeight: 280 }}>
+                <Box sx={{ p: (theme) => theme.spacing(2, 1, 1, 1) }}>
                     <>{children}</>
                 </Box>
             )}
@@ -61,7 +62,7 @@ export const TabsComponent: React.FC<TabsComponentProps> = ({ tabs }) => {
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={currentTabIndex} onChange={handleChange} aria-label="">
                     {tabs.map(({ tabLabel }, i) =>
-                        <Tab label={tabLabel} {...a11yProps(i)} sx={{ width: '50%', fontSize: 16, color: 'white', fontFamily: (theme) => theme.typography.body1 }} />)}
+                        <Tab label={tabLabel} {...a11yProps(i)} sx={{ width: '50%', fontSize: 16, color: 'white', fontFamily: (theme) => theme.typography.body2 }} />)}
                 </Tabs>
             </Box>
             {tabs.map(({ tabItem }, i) => <TabPanel value={currentTabIndex} index={i}>{tabItem}</TabPanel>)}
