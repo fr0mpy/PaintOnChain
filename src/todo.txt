@@ -1,11 +1,10 @@
+-- MINT MODAL --
+* needs to listen out for network changes and display connected network name
 
 -- CANVAS --
 * erase should not be selectable
 
--- NAVIGATION --  
-* links to turn to active when scroll past for mobile/tablet nav
-
--- CONTRACT -- 
+-- CONTRACT -- (TOMORROW BEGIN)
 * test all contract functions
 * deploy contract
 * add enum for contract address
@@ -13,7 +12,7 @@
 * verify contract
 * add contract to social links
 
--- HOSTING -- 
+-- HOSTING (TOMORROW RING GODADDY )-- 
 * host
 * point URL
 * sort routes for url
@@ -37,4 +36,5 @@
 * hook these up to social links
 
 -- CODE REFACTOR --
+* uglify
 * as and when

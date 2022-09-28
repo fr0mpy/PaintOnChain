@@ -48,7 +48,6 @@ export const ConnectWalletAndOpenMintingButton: React.FC<IConnectWalletButtonPro
 		}
 
 	}
-	// const buttonStyle = { '&:hover': { background: 'rgb(160, 84, 129)', color: 'white' } }
 	return (
 		<>
 			{walletAddress.length
@@ -63,9 +62,6 @@ export const ConnectWalletAndOpenMintingButton: React.FC<IConnectWalletButtonPro
 							Add MetaData & Mint
 						</Typography>
 					</StyledConnectWalletButton>
-					{/* {mobileVersion ? null : <Typography variant={'body1'}>
-						{`Connected as ${walletAddress.slice(0, 10)}...`}
-					</Typography>} */}
 				</>
 				: <StyledConnectWalletButton
 					variant={'contained'}

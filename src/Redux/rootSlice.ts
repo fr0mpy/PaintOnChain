@@ -3,6 +3,11 @@ import React from 'react';
 import { Sections } from '../Components/Common/Navigation/Headings';
 import { ModalType } from '../Components/Layout/ModalResolver';
 
+export enum ContractAddress {
+	Test = '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+	Ethereum = '',
+	Arbitrum = ''
+}
 export interface ISnackBar {
 	message: string;
 	duration?: number;
@@ -15,7 +20,7 @@ export interface IAppState {
 	width: number;
 	SVG: string;
 	walletAddress: string;
-	contractAddress: string;
+	contractAddress: ContractAddress;
 	tool: string;
 	brushColor: string;
 	isDrawingMode: boolean;
@@ -39,7 +44,7 @@ export const initialState: IAppState = {
 	width: 22,
 	SVG: '',
 	walletAddress: '',
-	contractAddress: '0x412010E39d2825Fb899391c73004d1217fa92BF5',
+	contractAddress: ContractAddress.Test,
 	tool: 'draw',
 	brushColor: 'black',
 	isDrawingMode: true,

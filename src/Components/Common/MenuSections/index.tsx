@@ -8,7 +8,6 @@ import React, { MutableRefObject } from "react";
 import { MenuSectionContainer } from "../MenuSectionContainer";
 import useMediaQuery from "@mui/material/useMediaQuery/useMediaQuery";
 import { Theme } from "@mui/material/styles";
-import { Spacer } from "../Spacer";
 import { Typography } from "@mui/material";
 
 
@@ -18,32 +17,12 @@ interface IMenuSections {
 };
 
 export const MenuSections: React.FC<IMenuSections> = ({ container, containerTitleHeight = 0 }) => {
-    const aboutSectionRef = React.useRef<HTMLSpanElement | null>(null);
-    const roadMapSectionRef = React.useRef<HTMLSpanElement | null>(null);
-    const teamSectionRef = React.useRef<HTMLSpanElement | null>(null);
-    const faqSectionRef = React.useRef<HTMLSpanElement | null>(null);
 
     const isDesktop = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
 
     const { section } = useAppSelector(state => {
         return { section: state.rootReducer.section }
     });
-
-    React.useEffect(() => {
-        switch (section) {
-            case Sections.RoadMap:
-                roadMapSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                break;
-            case Sections.Team:
-                teamSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                break;
-            case Sections.Faq:
-                faqSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                break;
-            default:
-                aboutSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    }, [section])
 
     if (isDesktop) {
         switch (section) {
@@ -59,39 +38,45 @@ export const MenuSections: React.FC<IMenuSections> = ({ container, containerTitl
                 return <></>;
         }
     } else {
-        return <>
-            <Typography variant={'h4'} textAlign={'center'} sx={{ paddingTop: 2, color: 'white' }} ref={aboutSectionRef}>
-                About
-            </Typography>
-            <Spacer vertical spacing={2} style={{ width: '100%' }} />
-            <MenuSectionContainer>
-                <About />
-            </MenuSectionContainer>
-            <Spacer vertical spacing={2} style={{ width: '100%' }} />
-            <Typography variant={'h4'} textAlign={'center'} sx={{ paddingTop: 2, color: 'white' }} ref={roadMapSectionRef}>
-                RoadMap
-            </Typography>
-            <Spacer vertical spacing={2} style={{ width: '100%' }} />
-            <MenuSectionContainer>
-                <RoadMap />
-            </MenuSectionContainer>
-            <Spacer vertical spacing={2} style={{ width: '100%' }} />
-            <Typography variant={'h4'} textAlign={'center'} sx={{ paddingTop: 2, color: 'white' }} ref={teamSectionRef}>
-                Team
-            </Typography>
-            <Spacer vertical spacing={2} style={{ width: '100%' }} />
-            <MenuSectionContainer>
-                <Team />
-            </MenuSectionContainer>
-            <Spacer vertical spacing={2} style={{ width: '100%' }} />
-            <Typography variant={'h4'} textAlign={'center'} sx={{ paddingTop: 2, color: 'white' }} ref={faqSectionRef}>
-                FAQ
-            </Typography>
-            <Spacer vertical spacing={2} style={{ width: '100%' }} />
-            <MenuSectionContainer>
-                <FAQ />
-            </MenuSectionContainer>
-            <Spacer vertical spacing={2} style={{ width: '100%' }} />
-        </>
+        switch (section) {
+            case Sections.About:
+                return <>
+                    <Typography variant={'h4'} textAlign={'center'} sx={{ paddingTop: 2, marginBottom: 2, color: 'white' }}>
+                        About
+                    </Typography>
+                    <MenuSectionContainer>
+                        <About />
+                    </MenuSectionContainer>
+                </>
+            case Sections.RoadMap:
+                return <>
+                    <Typography variant={'h4'} textAlign={'center'} sx={{ paddingTop: 2, marginBottom: 2, color: 'white' }}>
+                        RoadMap
+                    </Typography>
+                    <MenuSectionContainer>
+                        <RoadMap />
+                    </MenuSectionContainer>
+                </>
+            case Sections.Team:
+                return <>
+                    <Typography variant={'h4'} textAlign={'center'} sx={{ paddingTop: 2, marginBottom: 2, color: 'white' }}>
+                        Team
+                    </Typography>
+                    <MenuSectionContainer>
+                        <Team />
+                    </MenuSectionContainer>
+                </>
+            case Sections.Faq:
+                return <>
+                    <Typography variant={'h4'} textAlign={'center'} sx={{ paddingTop: 2, marginBottom: 2, color: 'white' }}>
+                        FAQ
+                    </Typography>
+                    <MenuSectionContainer>
+                        <FAQ />
+                    </MenuSectionContainer>
+                </>
+            default:
+                return <></>;
+        }
     }
 }

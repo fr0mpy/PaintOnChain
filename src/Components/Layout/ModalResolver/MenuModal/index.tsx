@@ -12,14 +12,25 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import React from "react";
 import { SocialLinks } from "../../../Common/SocialLinks";
 import { Typography } from "@mui/material";
+import throttle from "../../../../helpers/events";
+import { useAppSelector } from "../../../../Redux/store";
 
 export const MenuModal = () => {
 	const dispatch = useDispatch();
 	const containerRef = React.useRef<HTMLDivElement | null>(null);
 	const containerTitleRef = React.useRef<HTMLDivElement | null>(null);
 
+	const { section } = useAppSelector(state => {
+		return { section: state.rootReducer.section }
+	});
+
 	const handleClose = () => dispatch(setModalType(undefined));
-	const handleScrollToTop = () => containerRef.current?.scrollTo({ behavior: 'smooth', top: 0 });
+
+	React.useEffect(() => {
+		if (!containerRef.current) return;
+
+		containerRef.current.scrollTop = 0;
+	}, [section]);
 
 	return (
 		<Dialog
@@ -29,6 +40,7 @@ export const MenuModal = () => {
 				sx: {
 					maxHeight: '100%',
 					maxWidth: '100%',
+					height: '100%',
 					margin: 0,
 					backgroundColor: (theme) => theme.palette.primary.main,
 					borderRadius: 0
@@ -56,14 +68,9 @@ export const MenuModal = () => {
 					</Grid>
 				</Grid>
 			</DialogTitle>
-			<DialogContent dividers sx={{ backgroundColor: (theme) => theme.palette.primary.dark, paddingTop: 0 }} ref={containerRef}>
+			<DialogContent dividers sx={{ backgroundColor: (theme) => theme.palette.primary.dark, paddingTop: 0 }} ref={containerRef} >
 				<Grid container justifyContent={'center'}>
-					<MenuSections container={containerRef} containerTitleHeight={containerTitleRef.current?.clientHeight} />
-				</Grid>
-				<Grid container justifyContent={'center'}>
-					<IconButton onClick={handleScrollToTop}>
-						<ArrowUpwardIcon fontSize={'large'} sx={{ color: 'white' }} />
-					</IconButton>
+					<MenuSections />
 				</Grid>
 			</DialogContent>
 			<Grid container justifyContent={'center'} alignItems={'center'} sx={{ minHeight: 54, backgroundColor: (theme) => theme.palette.primary.light }}>

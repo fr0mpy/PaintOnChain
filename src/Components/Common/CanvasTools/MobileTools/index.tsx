@@ -184,7 +184,7 @@ export const MobileCanvasTools: React.FC<IProps> = ({
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'center', margin: '8px 0', width: 'fit-content' }}>
                                 <FormGroup>
-                                    <FormControlLabel control={<Checkbox onChange={handleShapeFill} sx={shapeFill ? {} : { '& .MuiSvgIcon-root': { fill: 'white' } }} />} label="Fill Shapes" />
+                                    <FormControlLabel control={<Checkbox onChange={handleShapeFill} sx={shapeFill ? {} : { '& .MuiSvgIcon-root': { fill: 'white' } }} />} label={<Typography variant={'body2'} sx={{ fontSize: 16 }}>Fill Shapes</Typography>} />
                                 </FormGroup>
                             </div>
                         </Grid>

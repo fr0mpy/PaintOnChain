@@ -45,7 +45,6 @@ export const CustomSnackbar = () => {
                         width: '1.5em'
                     }
                 }}
-            // action={action}
             >
                 <Typography variant={'body2'} sx={{ fontSize: 16 }}>
                     {message}

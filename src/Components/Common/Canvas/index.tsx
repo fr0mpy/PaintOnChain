@@ -84,9 +84,7 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 		brushColor,
 		shapeFill,
 		canvasHeight,
-		canvasWidth,
-		// isDrawingMode,
-		// objectSelection
+		canvasWidth
 	]);
 
 	React.useEffect(() => {
@@ -102,7 +100,6 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 		}
 
 		canvasRef.current.forEachObject(o => {
-			// check is in eerased items
 			o.selectable = objectSelection; o.evented = objectSelection
 		});
 		canvasRef.current.freeDrawingBrush.width = brushWidth;
@@ -119,7 +116,6 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 					break;
 
 				case 'erase':
-					console.log(canvasRef.current.item(0))
 					erasedItems.current.push(canvasRef.current.item(0));
 					break;
 				case 'line':

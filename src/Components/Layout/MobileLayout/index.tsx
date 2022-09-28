@@ -17,7 +17,6 @@ interface IProps {
 
 
 const MobileLayout: React.FC<IProps> = ({ canvasRef, canvas, canvasTools }) => {
-    console.log('mobile')
     const dispatch = useDispatch();
     const handleToSVG = () => {
         if (!canvasRef.current) return;

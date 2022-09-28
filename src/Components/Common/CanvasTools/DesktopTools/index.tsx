@@ -1,6 +1,6 @@
 import 'fabric-history';
 import { ColorPicker } from "../../ColorPicker";
-import { Checkbox, FormControlLabel, FormGroup, Grid, IconButton, Input, Slider } from "@mui/material";
+import { Checkbox, FormControlLabel, FormGroup, Grid, IconButton, Input, Slider, Typography } from "@mui/material";
 import React, { ChangeEvent } from "react";
 import CreateIcon from '@mui/icons-material/Create';
 import UndoIcon from '@mui/icons-material/Undo';
@@ -200,11 +200,10 @@ export const DesktopCanvasTools: React.FC<IProps> = ({
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'center', margin: '8px 0', width: '100%' }}>
                             <FormGroup>
-                                <FormControlLabel control={<Checkbox onChange={handleShapeFill} sx={shapeFill ? {} : { '& .MuiSvgIcon-root': { fill: 'white' } }} />} label="Fill Shapes" />
+                                <FormControlLabel control={<Checkbox onChange={handleShapeFill} sx={shapeFill ? {} : { '& .MuiSvgIcon-root': { fill: 'white' }, fontFamily: 'Archivo Black,sans-serif' }} />} label={<Typography variant={'body2'} sx={{ fontSize: 16 }}>Fill Shapes</Typography>} />
                             </FormGroup>
                         </div>
                     </Grid>
-
                 </Grid>
                 <Spacer vertical spacing={4} style={{ width: '100%' }} />
                 <Grid container justifyContent={'center'}>

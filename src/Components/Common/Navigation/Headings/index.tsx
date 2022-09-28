@@ -10,7 +10,11 @@ export enum Sections {
     Faq = 3,
 }
 
-export const Headings = () => {
+interface IProps {
+    activeIndex?: number;
+}
+
+export const Headings: React.FC<IProps> = ({ activeIndex }) => {
     const headings = ['About', 'RoadMap', 'Team', 'FAQ'];
 
     const dispatch = useDispatch();

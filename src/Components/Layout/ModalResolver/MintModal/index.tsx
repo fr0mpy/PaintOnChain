@@ -209,8 +209,6 @@ export const MintModal = () => {
 	const handleBoxScroll = () => {
 		if (!boxRef.current) return;
 
-		console.log(numberOfTraitForms * 64)
-
 		boxRef.current?.scrollTo({ behavior: 'smooth', top: 100000 });
 	};
 
@@ -257,12 +255,13 @@ export const MintModal = () => {
 							<CloseIcon fontSize={'large'} sx={{ color: 'white' }} />
 						</IconButton>
 					</Grid>
-					<Typography variant={'body2'} textAlign={'center'} sx={{ margin: (theme) => theme.spacing(0, 3) }}>
+					<Typography variant={'body2'} textAlign={'center'} sx={{ margin: (theme) => theme.spacing(0, 3), fontSize: 16 }}>
 						Connected as:
 					</Typography>
 					<Typography variant={'body1'} textAlign={'center'} sx={{ margin: (theme) => theme.spacing(0, 3) }}>
 						{`${walletAddress.slice(0, 30)}...`}
 					</Typography>
+
 				</DialogTitle>
 				<DialogContent dividers sx={{ backgroundColor: (theme) => theme.palette.primary.light, display: { xs: 'block', md: 'flex' }, alignItems: 'center' }}>
 					<Grid container justifyContent={'center'}>
@@ -278,7 +277,7 @@ export const MintModal = () => {
 									<Typography variant={'body2'} >
 										Mint Your Token
 									</Typography>
-									<Typography variant={'body1'} sx={{ fontSize: 12 }}>
+									<Typography variant={'body1'} sx={{ fontSize: 14 }}>
 										(On the Ethereum blockchain!)
 									</Typography>
 								</Button>

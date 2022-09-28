@@ -15,6 +15,14 @@ const FAQ: React.FC = () => {
 			</div>
 			<div style={{ margin: '24px 0' }}>
 				<Typography variant={'h3'} sx={{ marginBottom: 2 }}>
+					How Do I Switch Between the Ethereum & Arbitrum Networks?
+				</Typography>
+				<Typography variant={"body1"}>
+					Connect your wallet to either the Ethereum or Arbitrum network and then refresh the paintonchain.tools page.
+				</Typography>
+			</div>
+			<div style={{ margin: '24px 0' }}>
+				<Typography variant={'h3'} sx={{ marginBottom: 2 }}>
 					Will there be more tools to paint/draw with?
 				</Typography>
 				<Typography variant={"body1"}>
