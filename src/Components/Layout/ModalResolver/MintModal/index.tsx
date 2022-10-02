@@ -13,7 +13,7 @@ interface IMetaData {
 	name: string;
 	description: string;
 	image_data: string;
-	attributes: Array<ITraits>
+	attributes: string;
 }
 
 interface ITraits {
@@ -169,7 +169,9 @@ export const MintModal = () => {
 	}
 
 	const handleMint = async () => {
-
+		// console.log(SVG.length)
+		console.log("md length:", encodeURI(JSON.stringify(handleMetadata())).split(/%..|./).length - 1)
+		const { name, description, image_data, attributes } = handleMetadata();
 		if (!(window as any).ethereum) return;
 
 		if (!name || !description) {
@@ -186,11 +188,86 @@ export const MintModal = () => {
 
 		const mintAddress = walletToMintTo === WalletTypes.Own ? walletAddress : friendsWalletAddress;
 		const provider = new ethers.providers.Web3Provider((window as any).ethereum);
+		const signer = await provider.getSigner();
+		const contract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+		contract.mint(mintAddress, name, description, image_data, attributes, { gasLimit: 12000000 });
+	}
+
+	const getNumberOfTokensCreated = async () => {
+
+		if (!(window as any).ethereum) return;
+
+		const provider = new ethers.providers.Web3Provider((window as any).ethereum);
 		const signer = provider.getSigner();
 		const contract = new ethers.Contract(contractAddress, contractABI.abi, signer)
 
-		contract.mint(mintAddress, JSON.stringify(handleMetadata()));
+		const numberOfTokensCreated = await contract.getNumberOfTokensCreated();
+		return numberOfTokensCreated;
 	}
+
+	const getTokenMetaData = async (id: number) => {
+
+		if (!(window as any).ethereum) return;
+
+		const provider = new ethers.providers.Web3Provider((window as any).ethereum);
+		const signer = provider.getSigner();
+		const contract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+
+		const tokenMetadata = await contract.getTokenMetaData(id);
+
+
+		// return tokenMetadata;
+	}
+
+	const getWalletTokenBalance = async () => {
+
+		if (!(window as any).ethereum) return;
+
+		const provider = new ethers.providers.Web3Provider((window as any).ethereum);
+		const signer = provider.getSigner();
+		const contract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+
+		const tokenBalance = await contract.getWalletTokenBalance();
+
+		return tokenBalance;
+	}
+
+	const getAuthContractAddress = async () => {
+
+		if (!(window as any).ethereum) return;
+
+		const provider = new ethers.providers.Web3Provider((window as any).ethereum);
+		const signer = provider.getSigner();
+		const contract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+
+		const authContractAddress = await contract.getAuthContractAddress();
+
+		console.log(authContractAddress)
+	}
+
+	const setAuthContractAddress = async (address: string) => {
+
+		if (!(window as any).ethereum) return;
+
+		const provider = new ethers.providers.Web3Provider((window as any).ethereum);
+		const signer = provider.getSigner();
+		const contract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+
+		await contract.setAuthContractAddress(address);
+	}
+
+	const getTokenURI = async (id: number) => {
+		if (!(window as any).ethereum) return;
+
+		const provider = new ethers.providers.Web3Provider((window as any).ethereum);
+		const signer = provider.getSigner();
+		const contract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+
+		const tokenURI = await contract.tokenURI(id);
+
+
+	}
+
 
 	const handleMetadata = (): IMetaData => {
 		const attributes = traits.filter(t => t.trait_type && t.value);
@@ -200,9 +277,11 @@ export const MintModal = () => {
 			name,
 			description,
 			image_data: SVG,
-			attributes: attributes,
+			attributes: JSON.stringify(traits),
 		}
 	}
+
+	const SVGToBase64 = () => window.btoa(SVG);
 
 	const handleClose = () => dispatch(setModalType(undefined));
 
@@ -215,6 +294,7 @@ export const MintModal = () => {
 	const handleAddTrait = () => {
 		setNumberOfTraitForms(numberOfTraitForms + 1);
 	}
+
 	const mintButtonStyles = {
 		padding: (theme: Theme) => theme.spacing(1, 3),
 		minHeight: 48,
@@ -264,6 +344,7 @@ export const MintModal = () => {
 
 				</DialogTitle>
 				<DialogContent dividers sx={{ backgroundColor: (theme) => theme.palette.primary.light, display: { xs: 'block', md: 'flex' }, alignItems: 'center' }}>
+
 					<Grid container justifyContent={'center'}>
 						<div ref={svgContainerRef} dangerouslySetInnerHTML={{ __html: SVG }} />
 						<Grid

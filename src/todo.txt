@@ -4,6 +4,12 @@
 -- CANVAS --
 * erase should not be selectable
 
+-- METADATA -- 
+* external url
+* REMOVE <desc>Created with Fabric.js 5.2.1</desc>
+* add max total supply to contract on etherscan
+
+
 -- CONTRACT -- (TOMORROW BEGIN)
 * test all contract functions
 * deploy contract
@@ -26,6 +32,8 @@
 * images not being served ?
 * real social links 
 
+--- ARBITRUM HACK-A-THON ---
+
 -- WALLET --
 * name all test wallets
 * create wallet to launch from - secure it 
@@ -38,3 +46,5 @@
 -- CODE REFACTOR --
 * uglify
 * as and when
+
+* Register collection on metamask

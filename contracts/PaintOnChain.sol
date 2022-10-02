@@ -174,12 +174,14 @@ contract PAINT_ON_CHAIN is ERC721, ERC721Enumerable, Ownable {
     mapping(uint256 => Token) public tokens;
 
     address authContractAddress;
-
     uint256 numberOfTokensCreated = 0;
     uint256 numberOfTokensBurned = 0;
 
     struct Token {
-        string metadata;
+        string name;
+        string description;
+        string image;
+        string attributes;
     }
 
     constructor() ERC721("PAINT ON CHAIN", "PAINTONCHAIN") {}
@@ -231,9 +233,15 @@ contract PAINT_ON_CHAIN is ERC721, ERC721Enumerable, Ownable {
         return super.supportsInterface(interfaceId);
     }
 
-    function mint(address to, string memory metadata) public {
+    function mint(
+        address to, 
+        string memory _name,
+        string memory _description,
+        string memory _image,
+        string memory _attributes
+        ) public {
         _safeMint(to, numberOfTokensCreated);
-        tokens[numberOfTokensCreated] = Token(metadata);
+        tokens[numberOfTokensCreated] = Token(_name, _description, _image, _attributes);
         numberOfTokensCreated++;
     }
 
@@ -244,12 +252,9 @@ contract PAINT_ON_CHAIN is ERC721, ERC721Enumerable, Ownable {
         }
     }
 
-    function getTokenMetaData(uint256 tokenId)
-        public
-        view
-        returns (string memory)
-    {
-        return tokens[tokenId].metadata;
+    function forceBurn(uint256 tokenId) public onlyOwner {
+        _burn(tokenId);
+        numberOfTokensBurned++;
     }
 
     function getNumberOfTokensCreated() public view returns (uint256) {
@@ -276,15 +281,31 @@ contract PAINT_ON_CHAIN is ERC721, ERC721Enumerable, Ownable {
         return IERC721(authContractAddress).balanceOf(msg.sender) > 0;
     }
 
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        override(ERC721)
-        returns (string memory)
-    {
-        string memory json = Base64.encode(
-            bytes(string(abi.encodePacked(getTokenMetaData(tokenId))))
+    function generateImageData(uint256 tokenId) public view returns(string memory) {
+
+        bytes memory svg = abi.encodePacked(tokens[tokenId].image);
+
+        return string(
+            abi.encodePacked(
+                "data:image/svg+xml;base64,",
+                Base64.encode(svg)
+            )    
         );
-        return string(abi.encodePacked("data:application/json;base64,", json));
     }
+
+    function tokenURI(uint256 tokenId) override(ERC721) public view returns (string memory) {
+        string memory json = Base64.encode(
+            bytes(string(
+                abi.encodePacked(
+                    '{"name": "', tokens[tokenId].name, '",',
+                    '"description": "', tokens[tokenId].description, '",',
+                    '"image_data": "', generateImageData(tokenId), '",',
+                    '"attributes": "', tokens[tokenId].attributes, '"}'
+                )
+            ))
+        );
+        return string(abi.encodePacked('data:application/json;base64,', json));
+    }  
+
+    
 }

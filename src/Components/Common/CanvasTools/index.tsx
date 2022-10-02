@@ -94,7 +94,8 @@ export const CanvasTools: React.FC<IProps> = ({ canvasRef, objOriginRef, objRef,
 
 	const handleToSVG = () => {
 		if (!canvasRef.current) return;
-		const trimmedSVG = canvasRef.current.toSVG().split('>').slice(2, canvasRef.current.toSVG().split('>').length).join('>');
+		const trimmedSVG = canvasRef.current.toSVG().split('>').slice(2, canvasRef.current.toSVG().split('>').length).join('>').replace(/(\r\n|\n|\r)/gm, "");
+		console.log('svg', trimmedSVG)
 		dispatch(setSVG(trimmedSVG));
 	};
 

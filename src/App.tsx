@@ -17,7 +17,7 @@ function App() {
 	const renderWelcomeModal = () => {
 		setTimeout(() => {
 			dispatch(setModalType(ModalType.Welcome))
-		}, 2000)
+		}, 1500)
 	}
 
 	React.useEffect(() => {

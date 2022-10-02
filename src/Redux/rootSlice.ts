@@ -4,7 +4,7 @@ import { Sections } from '../Components/Common/Navigation/Headings';
 import { ModalType } from '../Components/Layout/ModalResolver';
 
 export enum ContractAddress {
-	Test = '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+	Goerli = '0xA179e8a35d0d9f8431e14599502bB9B8f2415b72',
 	Ethereum = '',
 	Arbitrum = ''
 }
@@ -44,7 +44,7 @@ export const initialState: IAppState = {
 	width: 22,
 	SVG: '',
 	walletAddress: '',
-	contractAddress: ContractAddress.Test,
+	contractAddress: ContractAddress.Goerli,
 	tool: 'draw',
 	brushColor: 'black',
 	isDrawingMode: true,
