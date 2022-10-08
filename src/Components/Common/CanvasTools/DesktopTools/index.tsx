@@ -85,7 +85,7 @@ export const DesktopCanvasTools: React.FC<IProps> = ({
                 <ConnectWalletAndOpenMintingButton handleMint={handleMint} />
             </div>
             <Grid container>
-                <Spacer vertical spacing={7} style={{ width: '100%' }} />
+                <Spacer vertical spacing={4} style={{ width: '100%' }} />
                 <Grid container alignItems={'flex-start'} justifyContent={'center'} spacing={6} sx={{ flexFlow: 'column' }}>
                     <Grid container item lg={12}>
                         <Grid container direction={"row"} spacing={3} justifyContent={"center"}>
@@ -205,7 +205,7 @@ export const DesktopCanvasTools: React.FC<IProps> = ({
                         </div>
                     </Grid>
                 </Grid>
-                <Spacer vertical spacing={4} style={{ width: '100%' }} />
+                <Spacer vertical spacing={2} style={{ width: '100%' }} />
                 <Grid container justifyContent={'center'}>
                     <ColorPicker color={brushColor} />
                     <ColorPalette />

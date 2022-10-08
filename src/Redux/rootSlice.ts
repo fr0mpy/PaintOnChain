@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import React from 'react';
 import { Sections } from '../Components/Common/Navigation/Headings';
 import { ModalType } from '../Components/Layout/ModalResolver';
+import { createColorPalette } from '../helpers/colors';
 
 export enum ContractAddress {
 	Goerli = '0xA179e8a35d0d9f8431e14599502bB9B8f2415b72',
@@ -36,7 +37,7 @@ export interface IAppState {
 	snackbar?: ISnackBar;
 }
 
-export const defaultColorPalette = ['black', ...Array(14).fill('white')];
+export const defaultColorPalette = JSON.parse(localStorage.getItem('colorsData') ?? '') ?? createColorPalette();
 
 export const initialState: IAppState = {
 	value: 0,

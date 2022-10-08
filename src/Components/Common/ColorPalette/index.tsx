@@ -1,7 +1,7 @@
 import { PalletteButton } from "./PalletteButton";
 import CachedIcon from '@mui/icons-material/Cached'
 import { Box, IconButton } from "@mui/material";
-import { generateRandomColor } from "../../../helpers/colors";
+import { createColorPalette, generateRandomColor } from "../../../helpers/colors";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { setBrushColor, setColorPallette } from "../../../Redux/rootSlice";
 import { useAppSelector } from "../../../Redux/store";
@@ -25,8 +25,7 @@ export const ColorPalette = () => {
 	}
 
 	const randomizePalette = () => {
-		const randomTertiaryColors = [...Array(6)].map(r => generateRandomColor());
-		const randomizedPalette = chroma.scale(randomTertiaryColors).colors(16);
+		const randomizedPalette = createColorPalette();
 		dispatch(setColorPallette(randomizedPalette));
 		dispatch(setBrushColor(randomizedPalette[currentColorIndex]));
 		handleSaveColors(randomizedPalette);

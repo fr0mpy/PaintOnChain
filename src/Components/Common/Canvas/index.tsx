@@ -3,7 +3,7 @@
 import React from 'react'
 import { fabric } from 'fabric';
 import { useDispatch } from 'react-redux';
-import { setBrushColor, setBrushWidth, setColorPallette } from '../../../Redux/rootSlice';
+import { setBrushColor, setBrushWidth } from '../../../Redux/rootSlice';
 import Grid from '@mui/material/Grid/Grid';
 import { useAppSelector } from '../../../Redux/store';
 import Typography from '@mui/material/Typography/Typography';
@@ -68,7 +68,6 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 			if (canvasRef.current && !loaded) {
 				canvasRef.current.isDrawingMode = isDrawingMode;
 				handleLoadCanvas();
-				handleLoadColors()
 				handleLoadBrushColor();
 				handleLoadBrushWidth();
 				setLoaded(true);
@@ -262,15 +261,6 @@ const Canvas: React.FC<IProps> = ({ canvasRef, drawingObjRef, mousedownRef, objO
 		canvasRef.current.loadFromJSON(loadedData, () => canvasRef.current?.renderAll());
 
 	};
-
-	const handleLoadColors = () => {
-		const colorsData = localStorage.getItem('colorsData');
-
-		if (!colorsData) return setLoaded(true);
-		const loadedColors = colorPallette.map((_: any, i: number) => JSON.parse(colorsData)[i])
-
-		dispatch(setColorPallette(loadedColors));
-	}
 
 	return (
 		<Grid
