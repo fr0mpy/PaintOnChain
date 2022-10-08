@@ -37,7 +37,11 @@ export interface IAppState {
 	snackbar?: ISnackBar;
 }
 
-export const defaultColorPalette = JSON.parse(localStorage.getItem('colorsData') ?? '') ?? createColorPalette();
+export const defaultColorPalette = () => {
+	const loadedColors = localStorage.getItem('colorsData')
+
+	return loadedColors ? JSON.parse(loadedColors) : createColorPalette()
+}
 
 export const initialState: IAppState = {
 	value: 0,
