@@ -147,7 +147,6 @@ export const MobileCanvasTools: React.FC<IProps> = ({
                             <div style={{
                                 display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', margin: '8px auto', flexFlow: 'row'
                             }}>
-                                <Button onClick={() => handleToSVG()}>CLICK 4 SVG</Button>
                                 <Slider aria-label="brush width" value={brushWidth} onChange={handleBrushWidth} sx={{ width: 140, marginRight: 2 }} />
                                 <Input
                                     value={brushWidth}
