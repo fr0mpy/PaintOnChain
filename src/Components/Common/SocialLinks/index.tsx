@@ -18,7 +18,7 @@ export const SocialLinks: React.FC<IProps> = ({ direction = 'row' }) => {
             <a href={'https://www.looksrare.com'} target={'_blank'} rel={'noreferrer'}>
                 <Avatar alt="Looks Rare" src="/images/looksrare.png" sx={{ backgroundColor: 'white', '&:hover': { opacity: .8 }, marginRight: 2 }} />
             </a>
-            <img src="/images/looksrare.png" href="/" alt={''} />
+            <img src="/images/looksrare.png" alt={''} />
 
             {/* <a href={'https://www.discord.com'} target={'_blank'} rel={'noreferrer'}>
                 <Avatar alt="Discord" src="/images/discord.png" sx={{ backgroundColor: 'white', '&:hover': { opacity: .8 }, marginRight: 2 }} />
