@@ -37,11 +37,13 @@ export interface IAppState {
 	snackbar?: ISnackBar;
 }
 
-export const defaultColorPalette = () => {
+const createDefaultColorPalette = (): Array<string> => {
 	const loadedColors = localStorage.getItem('colorsData')
-
+	console.log(loadedColors)
 	return loadedColors ? JSON.parse(loadedColors) : createColorPalette()
 }
+
+export const defaultColorPalette = createDefaultColorPalette();
 
 export const initialState: IAppState = {
 	value: 0,
